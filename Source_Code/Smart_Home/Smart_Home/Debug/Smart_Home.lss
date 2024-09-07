@@ -1,0 +1,394 @@
+
+Smart_Home.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001e8  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000012  00800060  000001e8  0000025c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000026e  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002a0  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000b0  00000000  00000000  000002dc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000d81  00000000  00000000  0000038c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006d3  00000000  00000000  0000110d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000005f0  00000000  00000000  000017e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000140  00000000  00000000  00001dd0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000602  00000000  00000000  00001f10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000007ac  00000000  00000000  00002512  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000090  00000000  00000000  00002cbe  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
+   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
+   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
+   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
+   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
+   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
+   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
+  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
+  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
+  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
+  16:	1a c0       	rjmp	.+52     	; 0x4c <__bad_interrupt>
+  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
+  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
+  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
+  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
+  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
+  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
+  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e8 ee       	ldi	r30, 0xE8	; 232
+  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a2 37       	cpi	r26, 0x72	; 114
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+  48:	08 d0       	rcall	.+16     	; 0x5a <main>
+  4a:	cc c0       	rjmp	.+408    	; 0x1e4 <_exit>
+
+0000004c <__bad_interrupt>:
+  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+
+0000004e <Initialize>:
+    }
+	return 0 ;
+}
+
+void Initialize (void){
+	status = GPIO_PIN_Initialize(&_pin);
+  4e:	80 e6       	ldi	r24, 0x60	; 96
+  50:	90 e0       	ldi	r25, 0x00	; 0
+  52:	b9 d0       	rcall	.+370    	; 0x1c6 <GPIO_PIN_Initialize>
+  54:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <status>
+  58:	08 95       	ret
+
+0000005a <main>:
+STD_ReturnType status = RET_OK; 
+GPIO_PIN_CONFIG _pin = {.pin_direction = GPIO_PIN_OUTPUT,.pin_logic = GPIO_PIN_LOGIC_LOW ,.pin_num = GPIO_PIN0 , .pin_port = GPIO_PORTD };
+
+int main(void)
+{	
+	Initialize();
+  5a:	f9 df       	rcall	.-14     	; 0x4e <Initialize>
+    /* Replace with your application code */
+    while (1) 
+    {
+		status = GPIO_PIN_Toggle_logic(&_pin);
+  5c:	80 e6       	ldi	r24, 0x60	; 96
+  5e:	90 e0       	ldi	r25, 0x00	; 0
+  60:	4f d0       	rcall	.+158    	; 0x100 <GPIO_PIN_Toggle_logic>
+  62:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <status>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  66:	2f e9       	ldi	r18, 0x9F	; 159
+  68:	86 e8       	ldi	r24, 0x86	; 134
+  6a:	91 e0       	ldi	r25, 0x01	; 1
+  6c:	21 50       	subi	r18, 0x01	; 1
+  6e:	80 40       	sbci	r24, 0x00	; 0
+  70:	90 40       	sbci	r25, 0x00	; 0
+  72:	e1 f7       	brne	.-8      	; 0x6c <main+0x12>
+  74:	00 c0       	rjmp	.+0      	; 0x76 <main+0x1c>
+  76:	00 00       	nop
+  78:	f1 cf       	rjmp	.-30     	; 0x5c <main+0x2>
+
+0000007a <GPIO_PIN_Write_logic>:
+	}
+	else{
+		*_logic = READ_BIN(*PORT_REG[_pin->pin_port],_pin->pin_num);
+	}
+	return Ret ;
+}
+  7a:	00 97       	sbiw	r24, 0x00	; 0
+  7c:	e9 f1       	breq	.+122    	; 0xf8 <GPIO_PIN_Write_logic+0x7e>
+  7e:	61 11       	cpse	r22, r1
+  80:	1d c0       	rjmp	.+58     	; 0xbc <GPIO_PIN_Write_logic+0x42>
+  82:	dc 01       	movw	r26, r24
+  84:	12 96       	adiw	r26, 0x02	; 2
+  86:	ec 91       	ld	r30, X
+  88:	12 97       	sbiw	r26, 0x02	; 2
+  8a:	f0 e0       	ldi	r31, 0x00	; 0
+  8c:	ee 0f       	add	r30, r30
+  8e:	ff 1f       	adc	r31, r31
+  90:	e5 59       	subi	r30, 0x95	; 149
+  92:	ff 4f       	sbci	r31, 0xFF	; 255
+  94:	01 90       	ld	r0, Z+
+  96:	f0 81       	ld	r31, Z
+  98:	e0 2d       	mov	r30, r0
+  9a:	40 81       	ld	r20, Z
+  9c:	21 e0       	ldi	r18, 0x01	; 1
+  9e:	30 e0       	ldi	r19, 0x00	; 0
+  a0:	b9 01       	movw	r22, r18
+  a2:	13 96       	adiw	r26, 0x03	; 3
+  a4:	0c 90       	ld	r0, X
+  a6:	02 c0       	rjmp	.+4      	; 0xac <GPIO_PIN_Write_logic+0x32>
+  a8:	66 0f       	add	r22, r22
+  aa:	77 1f       	adc	r23, r23
+  ac:	0a 94       	dec	r0
+  ae:	e2 f7       	brpl	.-8      	; 0xa8 <GPIO_PIN_Write_logic+0x2e>
+  b0:	cb 01       	movw	r24, r22
+  b2:	80 95       	com	r24
+  b4:	84 23       	and	r24, r20
+  b6:	80 83       	st	Z, r24
+  b8:	81 e0       	ldi	r24, 0x01	; 1
+  ba:	08 95       	ret
+  bc:	61 30       	cpi	r22, 0x01	; 1
+  be:	f1 f4       	brne	.+60     	; 0xfc <GPIO_PIN_Write_logic+0x82>
+  c0:	dc 01       	movw	r26, r24
+  c2:	12 96       	adiw	r26, 0x02	; 2
+  c4:	ec 91       	ld	r30, X
+  c6:	12 97       	sbiw	r26, 0x02	; 2
+  c8:	f0 e0       	ldi	r31, 0x00	; 0
+  ca:	ee 0f       	add	r30, r30
+  cc:	ff 1f       	adc	r31, r31
+  ce:	e5 59       	subi	r30, 0x95	; 149
+  d0:	ff 4f       	sbci	r31, 0xFF	; 255
+  d2:	01 90       	ld	r0, Z+
+  d4:	f0 81       	ld	r31, Z
+  d6:	e0 2d       	mov	r30, r0
+  d8:	40 81       	ld	r20, Z
+  da:	21 e0       	ldi	r18, 0x01	; 1
+  dc:	30 e0       	ldi	r19, 0x00	; 0
+  de:	b9 01       	movw	r22, r18
+  e0:	13 96       	adiw	r26, 0x03	; 3
+  e2:	0c 90       	ld	r0, X
+  e4:	02 c0       	rjmp	.+4      	; 0xea <GPIO_PIN_Write_logic+0x70>
+  e6:	66 0f       	add	r22, r22
+  e8:	77 1f       	adc	r23, r23
+  ea:	0a 94       	dec	r0
+  ec:	e2 f7       	brpl	.-8      	; 0xe6 <GPIO_PIN_Write_logic+0x6c>
+  ee:	cb 01       	movw	r24, r22
+  f0:	84 2b       	or	r24, r20
+  f2:	80 83       	st	Z, r24
+  f4:	81 e0       	ldi	r24, 0x01	; 1
+  f6:	08 95       	ret
+  f8:	80 e0       	ldi	r24, 0x00	; 0
+  fa:	08 95       	ret
+  fc:	81 e0       	ldi	r24, 0x01	; 1
+  fe:	08 95       	ret
+
+00000100 <GPIO_PIN_Toggle_logic>:
+ 100:	00 97       	sbiw	r24, 0x00	; 0
+ 102:	e1 f0       	breq	.+56     	; 0x13c <GPIO_PIN_Toggle_logic+0x3c>
+ 104:	dc 01       	movw	r26, r24
+ 106:	12 96       	adiw	r26, 0x02	; 2
+ 108:	ec 91       	ld	r30, X
+ 10a:	12 97       	sbiw	r26, 0x02	; 2
+ 10c:	f0 e0       	ldi	r31, 0x00	; 0
+ 10e:	ee 0f       	add	r30, r30
+ 110:	ff 1f       	adc	r31, r31
+ 112:	e5 59       	subi	r30, 0x95	; 149
+ 114:	ff 4f       	sbci	r31, 0xFF	; 255
+ 116:	01 90       	ld	r0, Z+
+ 118:	f0 81       	ld	r31, Z
+ 11a:	e0 2d       	mov	r30, r0
+ 11c:	40 81       	ld	r20, Z
+ 11e:	21 e0       	ldi	r18, 0x01	; 1
+ 120:	30 e0       	ldi	r19, 0x00	; 0
+ 122:	b9 01       	movw	r22, r18
+ 124:	13 96       	adiw	r26, 0x03	; 3
+ 126:	0c 90       	ld	r0, X
+ 128:	02 c0       	rjmp	.+4      	; 0x12e <GPIO_PIN_Toggle_logic+0x2e>
+ 12a:	66 0f       	add	r22, r22
+ 12c:	77 1f       	adc	r23, r23
+ 12e:	0a 94       	dec	r0
+ 130:	e2 f7       	brpl	.-8      	; 0x12a <GPIO_PIN_Toggle_logic+0x2a>
+ 132:	cb 01       	movw	r24, r22
+ 134:	84 27       	eor	r24, r20
+ 136:	80 83       	st	Z, r24
+ 138:	81 e0       	ldi	r24, 0x01	; 1
+ 13a:	08 95       	ret
+ 13c:	80 e0       	ldi	r24, 0x00	; 0
+ 13e:	08 95       	ret
+
+00000140 <GPIO_PIN_Give_Direction>:
+
+STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
+	STD_ReturnType Ret = RET_OK ;
+	if(NULL == _pin){
+ 140:	00 97       	sbiw	r24, 0x00	; 0
+ 142:	e9 f1       	breq	.+122    	; 0x1be <GPIO_PIN_Give_Direction+0x7e>
+		Ret = RET_NOT_OK ;
+	}
+	else{
+		if(GPIO_PIN_OUTPUT ==  _direction){
+ 144:	61 11       	cpse	r22, r1
+ 146:	1c c0       	rjmp	.+56     	; 0x180 <GPIO_PIN_Give_Direction+0x40>
+			SET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
+ 148:	dc 01       	movw	r26, r24
+ 14a:	12 96       	adiw	r26, 0x02	; 2
+ 14c:	ec 91       	ld	r30, X
+ 14e:	12 97       	sbiw	r26, 0x02	; 2
+ 150:	f0 e0       	ldi	r31, 0x00	; 0
+ 152:	ee 0f       	add	r30, r30
+ 154:	ff 1f       	adc	r31, r31
+ 156:	eb 59       	subi	r30, 0x9B	; 155
+ 158:	ff 4f       	sbci	r31, 0xFF	; 255
+ 15a:	01 90       	ld	r0, Z+
+ 15c:	f0 81       	ld	r31, Z
+ 15e:	e0 2d       	mov	r30, r0
+ 160:	40 81       	ld	r20, Z
+ 162:	21 e0       	ldi	r18, 0x01	; 1
+ 164:	30 e0       	ldi	r19, 0x00	; 0
+ 166:	b9 01       	movw	r22, r18
+ 168:	13 96       	adiw	r26, 0x03	; 3
+ 16a:	0c 90       	ld	r0, X
+ 16c:	02 c0       	rjmp	.+4      	; 0x172 <GPIO_PIN_Give_Direction+0x32>
+ 16e:	66 0f       	add	r22, r22
+ 170:	77 1f       	adc	r23, r23
+ 172:	0a 94       	dec	r0
+ 174:	e2 f7       	brpl	.-8      	; 0x16e <GPIO_PIN_Give_Direction+0x2e>
+ 176:	cb 01       	movw	r24, r22
+ 178:	84 2b       	or	r24, r20
+ 17a:	80 83       	st	Z, r24
+	}
+	return Ret ;
+}
+
+STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
+	STD_ReturnType Ret = RET_OK ;
+ 17c:	81 e0       	ldi	r24, 0x01	; 1
+ 17e:	08 95       	ret
+	}
+	else{
+		if(GPIO_PIN_OUTPUT ==  _direction){
+			SET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
+		}
+		else if (GPIO_PIN_INPUT  ==  _direction){
+ 180:	61 30       	cpi	r22, 0x01	; 1
+ 182:	f9 f4       	brne	.+62     	; 0x1c2 <GPIO_PIN_Give_Direction+0x82>
+			RESET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
+ 184:	dc 01       	movw	r26, r24
+ 186:	12 96       	adiw	r26, 0x02	; 2
+ 188:	ec 91       	ld	r30, X
+ 18a:	12 97       	sbiw	r26, 0x02	; 2
+ 18c:	f0 e0       	ldi	r31, 0x00	; 0
+ 18e:	ee 0f       	add	r30, r30
+ 190:	ff 1f       	adc	r31, r31
+ 192:	eb 59       	subi	r30, 0x9B	; 155
+ 194:	ff 4f       	sbci	r31, 0xFF	; 255
+ 196:	01 90       	ld	r0, Z+
+ 198:	f0 81       	ld	r31, Z
+ 19a:	e0 2d       	mov	r30, r0
+ 19c:	40 81       	ld	r20, Z
+ 19e:	21 e0       	ldi	r18, 0x01	; 1
+ 1a0:	30 e0       	ldi	r19, 0x00	; 0
+ 1a2:	b9 01       	movw	r22, r18
+ 1a4:	13 96       	adiw	r26, 0x03	; 3
+ 1a6:	0c 90       	ld	r0, X
+ 1a8:	02 c0       	rjmp	.+4      	; 0x1ae <GPIO_PIN_Give_Direction+0x6e>
+ 1aa:	66 0f       	add	r22, r22
+ 1ac:	77 1f       	adc	r23, r23
+ 1ae:	0a 94       	dec	r0
+ 1b0:	e2 f7       	brpl	.-8      	; 0x1aa <GPIO_PIN_Give_Direction+0x6a>
+ 1b2:	cb 01       	movw	r24, r22
+ 1b4:	80 95       	com	r24
+ 1b6:	84 23       	and	r24, r20
+ 1b8:	80 83       	st	Z, r24
+	}
+	return Ret ;
+}
+
+STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
+	STD_ReturnType Ret = RET_OK ;
+ 1ba:	81 e0       	ldi	r24, 0x01	; 1
+ 1bc:	08 95       	ret
+	if(NULL == _pin){
+		Ret = RET_NOT_OK ;
+ 1be:	80 e0       	ldi	r24, 0x00	; 0
+ 1c0:	08 95       	ret
+	}
+	return Ret ;
+}
+
+STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
+	STD_ReturnType Ret = RET_OK ;
+ 1c2:	81 e0       	ldi	r24, 0x01	; 1
+			RESET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
+		}
+		else {/*nothing*/}
+	}
+	return Ret ;
+}
+ 1c4:	08 95       	ret
+
+000001c6 <GPIO_PIN_Initialize>:
+#include "GPIO.h"
+volatile uint8 *PORT_REG[] = { &PORTB, &PORTC, &PORTD };
+volatile uint8 *DDR_REG[] = { &DDRB, &DDRC, &DDRD };
+	
+/**************************************Pin Functions******************************************/
+STD_ReturnType GPIO_PIN_Initialize(GPIO_PIN_CONFIG *_pin){
+ 1c6:	cf 93       	push	r28
+ 1c8:	df 93       	push	r29
+	STD_ReturnType Ret = RET_OK ;
+	if(NULL == _pin){
+ 1ca:	00 97       	sbiw	r24, 0x00	; 0
+ 1cc:	39 f0       	breq	.+14     	; 0x1dc <GPIO_PIN_Initialize+0x16>
+ 1ce:	ec 01       	movw	r28, r24
+		Ret = RET_NOT_OK ;
+	}
+	else{
+		/*Direction Initialization */
+		Ret = GPIO_PIN_Give_Direction(_pin ,_pin->pin_direction);
+ 1d0:	69 81       	ldd	r22, Y+1	; 0x01
+ 1d2:	b6 df       	rcall	.-148    	; 0x140 <GPIO_PIN_Give_Direction>
+		/*Logic Initialization */
+		Ret = GPIO_PIN_Write_logic(_pin,_pin->pin_logic);
+ 1d4:	68 81       	ld	r22, Y
+ 1d6:	ce 01       	movw	r24, r28
+ 1d8:	50 df       	rcall	.-352    	; 0x7a <GPIO_PIN_Write_logic>
+ 1da:	01 c0       	rjmp	.+2      	; 0x1de <GPIO_PIN_Initialize+0x18>
+	
+/**************************************Pin Functions******************************************/
+STD_ReturnType GPIO_PIN_Initialize(GPIO_PIN_CONFIG *_pin){
+	STD_ReturnType Ret = RET_OK ;
+	if(NULL == _pin){
+		Ret = RET_NOT_OK ;
+ 1dc:	80 e0       	ldi	r24, 0x00	; 0
+		Ret = GPIO_PIN_Give_Direction(_pin ,_pin->pin_direction);
+		/*Logic Initialization */
+		Ret = GPIO_PIN_Write_logic(_pin,_pin->pin_logic);
+	}
+	return Ret ;
+}
+ 1de:	df 91       	pop	r29
+ 1e0:	cf 91       	pop	r28
+ 1e2:	08 95       	ret
+
+000001e4 <_exit>:
+ 1e4:	f8 94       	cli
+
+000001e6 <__stop_program>:
+ 1e6:	ff cf       	rjmp	.-2      	; 0x1e6 <__stop_program>

@@ -8,5 +8,6 @@
 
 
 #include "MCAL_Layer/GPIO.h"
+#include "MCAL_Layer/Interrupt/External_Interrupt.h"
 void Initialize (void);
 

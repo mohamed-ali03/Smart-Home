@@ -1,6 +1,11 @@
-MCAL_Layer/GPIO.d MCAL_Layer/GPIO.o: ../MCAL_Layer/GPIO.c \
- ../MCAL_Layer/GPIO.h ../MCAL_Layer/STD_DataType.h \
- ../MCAL_Layer/STD_Library.h \
+MCAL_Layer/Interrupt/External_Interrupt.d \
+ MCAL_Layer/Interrupt/External_Interrupt.o: \
+ ../MCAL_Layer/Interrupt/External_Interrupt.c \
+ ../MCAL_Layer/Interrupt/External_Interrupt.h \
+ ../MCAL_Layer/Interrupt/Interrupt_CFG.h \
+ ../MCAL_Layer/Interrupt/../GPIO.h \
+ ../MCAL_Layer/Interrupt/../STD_DataType.h \
+ ../MCAL_Layer/Interrupt/../STD_Library.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -21,11 +26,15 @@ MCAL_Layer/GPIO.d MCAL_Layer/GPIO.o: ../MCAL_Layer/GPIO.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h
 
-../MCAL_Layer/GPIO.h:
+../MCAL_Layer/Interrupt/External_Interrupt.h:
 
-../MCAL_Layer/STD_DataType.h:
+../MCAL_Layer/Interrupt/Interrupt_CFG.h:
 
-../MCAL_Layer/STD_Library.h:
+../MCAL_Layer/Interrupt/../GPIO.h:
+
+../MCAL_Layer/Interrupt/../STD_DataType.h:
+
+../MCAL_Layer/Interrupt/../STD_Library.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 

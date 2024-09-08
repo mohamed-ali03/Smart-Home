@@ -3,53 +3,55 @@ Smart_Home.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001e8  00000000  00000000  00000074  2**1
+  0 .text         00000326  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000012  00800060  000001e8  0000025c  2**0
+  1 .data         00000016  00800060  00000326  000003ba  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  0000026e  2**0
+  2 .bss          00000004  00800076  00800076  000003d0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003d0  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000002a0  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000400  2**2
                   CONTENTS, READONLY
-  4 .debug_aranges 000000b0  00000000  00000000  000002dc  2**0
+  5 .debug_aranges 00000110  00000000  00000000  0000043c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000d81  00000000  00000000  0000038c  2**0
+  6 .debug_info   000010b6  00000000  00000000  0000054c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000006d3  00000000  00000000  0000110d  2**0
+  7 .debug_abbrev 000007a0  00000000  00000000  00001602  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000005f0  00000000  00000000  000017e0  2**0
+  8 .debug_line   000007a4  00000000  00000000  00001da2  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000140  00000000  00000000  00001dd0  2**2
+  9 .debug_frame  00000274  00000000  00000000  00002548  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000602  00000000  00000000  00001f10  2**0
+ 10 .debug_str    0000073a  00000000  00000000  000027bc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000007ac  00000000  00000000  00002512  2**0
+ 11 .debug_loc    00000b20  00000000  00000000  00002ef6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000090  00000000  00000000  00002cbe  2**0
+ 12 .debug_ranges 000000e0  00000000  00000000  00003a16  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
-   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
-   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
-   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
-   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
-   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
-   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
-   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
-  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
-  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
-  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
-  16:	1a c0       	rjmp	.+52     	; 0x4c <__bad_interrupt>
-  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
-  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
-  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
-  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
-  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
-  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
-  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+   2:	37 c1       	rjmp	.+622    	; 0x272 <__vector_1>
+   4:	62 c1       	rjmp	.+708    	; 0x2ca <__vector_2>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
 
 00000026 <__ctors_end>:
   26:	11 24       	eor	r1, r1
@@ -63,332 +65,523 @@ Disassembly of section .text:
   32:	10 e0       	ldi	r17, 0x00	; 0
   34:	a0 e6       	ldi	r26, 0x60	; 96
   36:	b0 e0       	ldi	r27, 0x00	; 0
-  38:	e8 ee       	ldi	r30, 0xE8	; 232
-  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  38:	e6 e2       	ldi	r30, 0x26	; 38
+  3a:	f3 e0       	ldi	r31, 0x03	; 3
   3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
   3e:	05 90       	lpm	r0, Z+
   40:	0d 92       	st	X+, r0
-  42:	a2 37       	cpi	r26, 0x72	; 114
+  42:	a6 37       	cpi	r26, 0x76	; 118
   44:	b1 07       	cpc	r27, r17
   46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
-  48:	08 d0       	rcall	.+16     	; 0x5a <main>
-  4a:	cc c0       	rjmp	.+408    	; 0x1e4 <_exit>
 
-0000004c <__bad_interrupt>:
-  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+00000048 <__do_clear_bss>:
+  48:	20 e0       	ldi	r18, 0x00	; 0
+  4a:	a6 e7       	ldi	r26, 0x76	; 118
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
 
-0000004e <Initialize>:
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	aa 37       	cpi	r26, 0x7A	; 122
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	13 d0       	rcall	.+38     	; 0x80 <main>
+  5a:	63 c1       	rjmp	.+710    	; 0x322 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <toggle>:
+	status = INTx_Initialize(&int0);
+}
+
+
+void toggle(){
+	status = GPIO_PIN_Toggle_logic(&_pin);
+  5e:	84 e6       	ldi	r24, 0x64	; 100
+  60:	90 e0       	ldi	r25, 0x00	; 0
+  62:	53 d0       	rcall	.+166    	; 0x10a <GPIO_PIN_Toggle_logic>
+  64:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <status>
+  68:	08 95       	ret
+
+0000006a <Initialize>:
     }
 	return 0 ;
 }
 
 void Initialize (void){
 	status = GPIO_PIN_Initialize(&_pin);
-  4e:	80 e6       	ldi	r24, 0x60	; 96
-  50:	90 e0       	ldi	r25, 0x00	; 0
-  52:	b9 d0       	rcall	.+370    	; 0x1c6 <GPIO_PIN_Initialize>
-  54:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <status>
-  58:	08 95       	ret
+  6a:	84 e6       	ldi	r24, 0x64	; 100
+  6c:	90 e0       	ldi	r25, 0x00	; 0
+  6e:	b0 d0       	rcall	.+352    	; 0x1d0 <GPIO_PIN_Initialize>
+  70:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <status>
+	status = INTx_Initialize(&int0);
+  74:	80 e6       	ldi	r24, 0x60	; 96
+  76:	90 e0       	ldi	r25, 0x00	; 0
+  78:	ea d0       	rcall	.+468    	; 0x24e <INTx_Initialize>
+  7a:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <status>
+  7e:	08 95       	ret
 
-0000005a <main>:
-STD_ReturnType status = RET_OK; 
-GPIO_PIN_CONFIG _pin = {.pin_direction = GPIO_PIN_OUTPUT,.pin_logic = GPIO_PIN_LOGIC_LOW ,.pin_num = GPIO_PIN0 , .pin_port = GPIO_PORTD };
+00000080 <main>:
 
+INTx_CONFG int0 = {.con_reg = INTx_RISING_EDGE_INTERRUPT , .InterruptManager = toggle , .intx = INT1_};
+	
 int main(void)
 {	
 	Initialize();
-  5a:	f9 df       	rcall	.-14     	; 0x4e <Initialize>
-    /* Replace with your application code */
-    while (1) 
-    {
-		status = GPIO_PIN_Toggle_logic(&_pin);
-  5c:	80 e6       	ldi	r24, 0x60	; 96
-  5e:	90 e0       	ldi	r25, 0x00	; 0
-  60:	4f d0       	rcall	.+158    	; 0x100 <GPIO_PIN_Toggle_logic>
-  62:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <status>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
+  80:	f4 df       	rcall	.-24     	; 0x6a <Initialize>
+  82:	ff cf       	rjmp	.-2      	; 0x82 <main+0x2>
 
-	__builtin_avr_delay_cycles(__ticks_dc);
-  66:	2f e9       	ldi	r18, 0x9F	; 159
-  68:	86 e8       	ldi	r24, 0x86	; 134
-  6a:	91 e0       	ldi	r25, 0x01	; 1
-  6c:	21 50       	subi	r18, 0x01	; 1
-  6e:	80 40       	sbci	r24, 0x00	; 0
-  70:	90 40       	sbci	r25, 0x00	; 0
-  72:	e1 f7       	brne	.-8      	; 0x6c <main+0x12>
-  74:	00 c0       	rjmp	.+0      	; 0x76 <main+0x1c>
-  76:	00 00       	nop
-  78:	f1 cf       	rjmp	.-30     	; 0x5c <main+0x2>
-
-0000007a <GPIO_PIN_Write_logic>:
+00000084 <GPIO_PIN_Write_logic>:
 	}
 	else{
 		*_logic = READ_BIN(*PORT_REG[_pin->pin_port],_pin->pin_num);
 	}
 	return Ret ;
 }
-  7a:	00 97       	sbiw	r24, 0x00	; 0
-  7c:	e9 f1       	breq	.+122    	; 0xf8 <GPIO_PIN_Write_logic+0x7e>
-  7e:	61 11       	cpse	r22, r1
-  80:	1d c0       	rjmp	.+58     	; 0xbc <GPIO_PIN_Write_logic+0x42>
-  82:	dc 01       	movw	r26, r24
-  84:	12 96       	adiw	r26, 0x02	; 2
-  86:	ec 91       	ld	r30, X
-  88:	12 97       	sbiw	r26, 0x02	; 2
-  8a:	f0 e0       	ldi	r31, 0x00	; 0
-  8c:	ee 0f       	add	r30, r30
-  8e:	ff 1f       	adc	r31, r31
-  90:	e5 59       	subi	r30, 0x95	; 149
-  92:	ff 4f       	sbci	r31, 0xFF	; 255
-  94:	01 90       	ld	r0, Z+
-  96:	f0 81       	ld	r31, Z
-  98:	e0 2d       	mov	r30, r0
-  9a:	40 81       	ld	r20, Z
-  9c:	21 e0       	ldi	r18, 0x01	; 1
-  9e:	30 e0       	ldi	r19, 0x00	; 0
-  a0:	b9 01       	movw	r22, r18
-  a2:	13 96       	adiw	r26, 0x03	; 3
-  a4:	0c 90       	ld	r0, X
-  a6:	02 c0       	rjmp	.+4      	; 0xac <GPIO_PIN_Write_logic+0x32>
-  a8:	66 0f       	add	r22, r22
-  aa:	77 1f       	adc	r23, r23
-  ac:	0a 94       	dec	r0
-  ae:	e2 f7       	brpl	.-8      	; 0xa8 <GPIO_PIN_Write_logic+0x2e>
-  b0:	cb 01       	movw	r24, r22
-  b2:	80 95       	com	r24
-  b4:	84 23       	and	r24, r20
-  b6:	80 83       	st	Z, r24
-  b8:	81 e0       	ldi	r24, 0x01	; 1
-  ba:	08 95       	ret
-  bc:	61 30       	cpi	r22, 0x01	; 1
-  be:	f1 f4       	brne	.+60     	; 0xfc <GPIO_PIN_Write_logic+0x82>
-  c0:	dc 01       	movw	r26, r24
-  c2:	12 96       	adiw	r26, 0x02	; 2
-  c4:	ec 91       	ld	r30, X
-  c6:	12 97       	sbiw	r26, 0x02	; 2
-  c8:	f0 e0       	ldi	r31, 0x00	; 0
-  ca:	ee 0f       	add	r30, r30
-  cc:	ff 1f       	adc	r31, r31
-  ce:	e5 59       	subi	r30, 0x95	; 149
-  d0:	ff 4f       	sbci	r31, 0xFF	; 255
-  d2:	01 90       	ld	r0, Z+
-  d4:	f0 81       	ld	r31, Z
-  d6:	e0 2d       	mov	r30, r0
-  d8:	40 81       	ld	r20, Z
-  da:	21 e0       	ldi	r18, 0x01	; 1
-  dc:	30 e0       	ldi	r19, 0x00	; 0
-  de:	b9 01       	movw	r22, r18
-  e0:	13 96       	adiw	r26, 0x03	; 3
-  e2:	0c 90       	ld	r0, X
-  e4:	02 c0       	rjmp	.+4      	; 0xea <GPIO_PIN_Write_logic+0x70>
-  e6:	66 0f       	add	r22, r22
-  e8:	77 1f       	adc	r23, r23
-  ea:	0a 94       	dec	r0
-  ec:	e2 f7       	brpl	.-8      	; 0xe6 <GPIO_PIN_Write_logic+0x6c>
-  ee:	cb 01       	movw	r24, r22
-  f0:	84 2b       	or	r24, r20
-  f2:	80 83       	st	Z, r24
-  f4:	81 e0       	ldi	r24, 0x01	; 1
-  f6:	08 95       	ret
-  f8:	80 e0       	ldi	r24, 0x00	; 0
-  fa:	08 95       	ret
-  fc:	81 e0       	ldi	r24, 0x01	; 1
-  fe:	08 95       	ret
+  84:	00 97       	sbiw	r24, 0x00	; 0
+  86:	e9 f1       	breq	.+122    	; 0x102 <GPIO_PIN_Write_logic+0x7e>
+  88:	61 11       	cpse	r22, r1
+  8a:	1d c0       	rjmp	.+58     	; 0xc6 <GPIO_PIN_Write_logic+0x42>
+  8c:	dc 01       	movw	r26, r24
+  8e:	12 96       	adiw	r26, 0x02	; 2
+  90:	ec 91       	ld	r30, X
+  92:	12 97       	sbiw	r26, 0x02	; 2
+  94:	f0 e0       	ldi	r31, 0x00	; 0
+  96:	ee 0f       	add	r30, r30
+  98:	ff 1f       	adc	r31, r31
+  9a:	e1 59       	subi	r30, 0x91	; 145
+  9c:	ff 4f       	sbci	r31, 0xFF	; 255
+  9e:	01 90       	ld	r0, Z+
+  a0:	f0 81       	ld	r31, Z
+  a2:	e0 2d       	mov	r30, r0
+  a4:	40 81       	ld	r20, Z
+  a6:	21 e0       	ldi	r18, 0x01	; 1
+  a8:	30 e0       	ldi	r19, 0x00	; 0
+  aa:	b9 01       	movw	r22, r18
+  ac:	13 96       	adiw	r26, 0x03	; 3
+  ae:	0c 90       	ld	r0, X
+  b0:	02 c0       	rjmp	.+4      	; 0xb6 <GPIO_PIN_Write_logic+0x32>
+  b2:	66 0f       	add	r22, r22
+  b4:	77 1f       	adc	r23, r23
+  b6:	0a 94       	dec	r0
+  b8:	e2 f7       	brpl	.-8      	; 0xb2 <GPIO_PIN_Write_logic+0x2e>
+  ba:	cb 01       	movw	r24, r22
+  bc:	80 95       	com	r24
+  be:	84 23       	and	r24, r20
+  c0:	80 83       	st	Z, r24
+  c2:	81 e0       	ldi	r24, 0x01	; 1
+  c4:	08 95       	ret
+  c6:	61 30       	cpi	r22, 0x01	; 1
+  c8:	f1 f4       	brne	.+60     	; 0x106 <GPIO_PIN_Write_logic+0x82>
+  ca:	dc 01       	movw	r26, r24
+  cc:	12 96       	adiw	r26, 0x02	; 2
+  ce:	ec 91       	ld	r30, X
+  d0:	12 97       	sbiw	r26, 0x02	; 2
+  d2:	f0 e0       	ldi	r31, 0x00	; 0
+  d4:	ee 0f       	add	r30, r30
+  d6:	ff 1f       	adc	r31, r31
+  d8:	e1 59       	subi	r30, 0x91	; 145
+  da:	ff 4f       	sbci	r31, 0xFF	; 255
+  dc:	01 90       	ld	r0, Z+
+  de:	f0 81       	ld	r31, Z
+  e0:	e0 2d       	mov	r30, r0
+  e2:	40 81       	ld	r20, Z
+  e4:	21 e0       	ldi	r18, 0x01	; 1
+  e6:	30 e0       	ldi	r19, 0x00	; 0
+  e8:	b9 01       	movw	r22, r18
+  ea:	13 96       	adiw	r26, 0x03	; 3
+  ec:	0c 90       	ld	r0, X
+  ee:	02 c0       	rjmp	.+4      	; 0xf4 <GPIO_PIN_Write_logic+0x70>
+  f0:	66 0f       	add	r22, r22
+  f2:	77 1f       	adc	r23, r23
+  f4:	0a 94       	dec	r0
+  f6:	e2 f7       	brpl	.-8      	; 0xf0 <GPIO_PIN_Write_logic+0x6c>
+  f8:	cb 01       	movw	r24, r22
+  fa:	84 2b       	or	r24, r20
+  fc:	80 83       	st	Z, r24
+  fe:	81 e0       	ldi	r24, 0x01	; 1
+ 100:	08 95       	ret
+ 102:	80 e0       	ldi	r24, 0x00	; 0
+ 104:	08 95       	ret
+ 106:	81 e0       	ldi	r24, 0x01	; 1
+ 108:	08 95       	ret
 
-00000100 <GPIO_PIN_Toggle_logic>:
- 100:	00 97       	sbiw	r24, 0x00	; 0
- 102:	e1 f0       	breq	.+56     	; 0x13c <GPIO_PIN_Toggle_logic+0x3c>
- 104:	dc 01       	movw	r26, r24
- 106:	12 96       	adiw	r26, 0x02	; 2
- 108:	ec 91       	ld	r30, X
- 10a:	12 97       	sbiw	r26, 0x02	; 2
- 10c:	f0 e0       	ldi	r31, 0x00	; 0
- 10e:	ee 0f       	add	r30, r30
- 110:	ff 1f       	adc	r31, r31
- 112:	e5 59       	subi	r30, 0x95	; 149
- 114:	ff 4f       	sbci	r31, 0xFF	; 255
- 116:	01 90       	ld	r0, Z+
- 118:	f0 81       	ld	r31, Z
- 11a:	e0 2d       	mov	r30, r0
- 11c:	40 81       	ld	r20, Z
- 11e:	21 e0       	ldi	r18, 0x01	; 1
- 120:	30 e0       	ldi	r19, 0x00	; 0
- 122:	b9 01       	movw	r22, r18
- 124:	13 96       	adiw	r26, 0x03	; 3
- 126:	0c 90       	ld	r0, X
- 128:	02 c0       	rjmp	.+4      	; 0x12e <GPIO_PIN_Toggle_logic+0x2e>
- 12a:	66 0f       	add	r22, r22
- 12c:	77 1f       	adc	r23, r23
- 12e:	0a 94       	dec	r0
- 130:	e2 f7       	brpl	.-8      	; 0x12a <GPIO_PIN_Toggle_logic+0x2a>
- 132:	cb 01       	movw	r24, r22
- 134:	84 27       	eor	r24, r20
- 136:	80 83       	st	Z, r24
- 138:	81 e0       	ldi	r24, 0x01	; 1
- 13a:	08 95       	ret
- 13c:	80 e0       	ldi	r24, 0x00	; 0
- 13e:	08 95       	ret
+0000010a <GPIO_PIN_Toggle_logic>:
+ 10a:	00 97       	sbiw	r24, 0x00	; 0
+ 10c:	e1 f0       	breq	.+56     	; 0x146 <GPIO_PIN_Toggle_logic+0x3c>
+ 10e:	dc 01       	movw	r26, r24
+ 110:	12 96       	adiw	r26, 0x02	; 2
+ 112:	ec 91       	ld	r30, X
+ 114:	12 97       	sbiw	r26, 0x02	; 2
+ 116:	f0 e0       	ldi	r31, 0x00	; 0
+ 118:	ee 0f       	add	r30, r30
+ 11a:	ff 1f       	adc	r31, r31
+ 11c:	e1 59       	subi	r30, 0x91	; 145
+ 11e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 120:	01 90       	ld	r0, Z+
+ 122:	f0 81       	ld	r31, Z
+ 124:	e0 2d       	mov	r30, r0
+ 126:	40 81       	ld	r20, Z
+ 128:	21 e0       	ldi	r18, 0x01	; 1
+ 12a:	30 e0       	ldi	r19, 0x00	; 0
+ 12c:	b9 01       	movw	r22, r18
+ 12e:	13 96       	adiw	r26, 0x03	; 3
+ 130:	0c 90       	ld	r0, X
+ 132:	02 c0       	rjmp	.+4      	; 0x138 <GPIO_PIN_Toggle_logic+0x2e>
+ 134:	66 0f       	add	r22, r22
+ 136:	77 1f       	adc	r23, r23
+ 138:	0a 94       	dec	r0
+ 13a:	e2 f7       	brpl	.-8      	; 0x134 <GPIO_PIN_Toggle_logic+0x2a>
+ 13c:	cb 01       	movw	r24, r22
+ 13e:	84 27       	eor	r24, r20
+ 140:	80 83       	st	Z, r24
+ 142:	81 e0       	ldi	r24, 0x01	; 1
+ 144:	08 95       	ret
+ 146:	80 e0       	ldi	r24, 0x00	; 0
+ 148:	08 95       	ret
 
-00000140 <GPIO_PIN_Give_Direction>:
+0000014a <GPIO_PIN_Give_Direction>:
 
 STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
 	STD_ReturnType Ret = RET_OK ;
 	if(NULL == _pin){
- 140:	00 97       	sbiw	r24, 0x00	; 0
- 142:	e9 f1       	breq	.+122    	; 0x1be <GPIO_PIN_Give_Direction+0x7e>
+ 14a:	00 97       	sbiw	r24, 0x00	; 0
+ 14c:	e9 f1       	breq	.+122    	; 0x1c8 <GPIO_PIN_Give_Direction+0x7e>
 		Ret = RET_NOT_OK ;
 	}
 	else{
 		if(GPIO_PIN_OUTPUT ==  _direction){
- 144:	61 11       	cpse	r22, r1
- 146:	1c c0       	rjmp	.+56     	; 0x180 <GPIO_PIN_Give_Direction+0x40>
+ 14e:	61 11       	cpse	r22, r1
+ 150:	1c c0       	rjmp	.+56     	; 0x18a <GPIO_PIN_Give_Direction+0x40>
 			SET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
- 148:	dc 01       	movw	r26, r24
- 14a:	12 96       	adiw	r26, 0x02	; 2
- 14c:	ec 91       	ld	r30, X
- 14e:	12 97       	sbiw	r26, 0x02	; 2
- 150:	f0 e0       	ldi	r31, 0x00	; 0
- 152:	ee 0f       	add	r30, r30
- 154:	ff 1f       	adc	r31, r31
- 156:	eb 59       	subi	r30, 0x9B	; 155
- 158:	ff 4f       	sbci	r31, 0xFF	; 255
- 15a:	01 90       	ld	r0, Z+
- 15c:	f0 81       	ld	r31, Z
- 15e:	e0 2d       	mov	r30, r0
- 160:	40 81       	ld	r20, Z
- 162:	21 e0       	ldi	r18, 0x01	; 1
- 164:	30 e0       	ldi	r19, 0x00	; 0
- 166:	b9 01       	movw	r22, r18
- 168:	13 96       	adiw	r26, 0x03	; 3
- 16a:	0c 90       	ld	r0, X
- 16c:	02 c0       	rjmp	.+4      	; 0x172 <GPIO_PIN_Give_Direction+0x32>
- 16e:	66 0f       	add	r22, r22
- 170:	77 1f       	adc	r23, r23
- 172:	0a 94       	dec	r0
- 174:	e2 f7       	brpl	.-8      	; 0x16e <GPIO_PIN_Give_Direction+0x2e>
- 176:	cb 01       	movw	r24, r22
- 178:	84 2b       	or	r24, r20
- 17a:	80 83       	st	Z, r24
+ 152:	dc 01       	movw	r26, r24
+ 154:	12 96       	adiw	r26, 0x02	; 2
+ 156:	ec 91       	ld	r30, X
+ 158:	12 97       	sbiw	r26, 0x02	; 2
+ 15a:	f0 e0       	ldi	r31, 0x00	; 0
+ 15c:	ee 0f       	add	r30, r30
+ 15e:	ff 1f       	adc	r31, r31
+ 160:	e7 59       	subi	r30, 0x97	; 151
+ 162:	ff 4f       	sbci	r31, 0xFF	; 255
+ 164:	01 90       	ld	r0, Z+
+ 166:	f0 81       	ld	r31, Z
+ 168:	e0 2d       	mov	r30, r0
+ 16a:	40 81       	ld	r20, Z
+ 16c:	21 e0       	ldi	r18, 0x01	; 1
+ 16e:	30 e0       	ldi	r19, 0x00	; 0
+ 170:	b9 01       	movw	r22, r18
+ 172:	13 96       	adiw	r26, 0x03	; 3
+ 174:	0c 90       	ld	r0, X
+ 176:	02 c0       	rjmp	.+4      	; 0x17c <GPIO_PIN_Give_Direction+0x32>
+ 178:	66 0f       	add	r22, r22
+ 17a:	77 1f       	adc	r23, r23
+ 17c:	0a 94       	dec	r0
+ 17e:	e2 f7       	brpl	.-8      	; 0x178 <GPIO_PIN_Give_Direction+0x2e>
+ 180:	cb 01       	movw	r24, r22
+ 182:	84 2b       	or	r24, r20
+ 184:	80 83       	st	Z, r24
 	}
 	return Ret ;
 }
 
 STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
 	STD_ReturnType Ret = RET_OK ;
- 17c:	81 e0       	ldi	r24, 0x01	; 1
- 17e:	08 95       	ret
+ 186:	81 e0       	ldi	r24, 0x01	; 1
+ 188:	08 95       	ret
 	}
 	else{
 		if(GPIO_PIN_OUTPUT ==  _direction){
 			SET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
 		}
 		else if (GPIO_PIN_INPUT  ==  _direction){
- 180:	61 30       	cpi	r22, 0x01	; 1
- 182:	f9 f4       	brne	.+62     	; 0x1c2 <GPIO_PIN_Give_Direction+0x82>
+ 18a:	61 30       	cpi	r22, 0x01	; 1
+ 18c:	f9 f4       	brne	.+62     	; 0x1cc <GPIO_PIN_Give_Direction+0x82>
 			RESET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
- 184:	dc 01       	movw	r26, r24
- 186:	12 96       	adiw	r26, 0x02	; 2
- 188:	ec 91       	ld	r30, X
- 18a:	12 97       	sbiw	r26, 0x02	; 2
- 18c:	f0 e0       	ldi	r31, 0x00	; 0
- 18e:	ee 0f       	add	r30, r30
- 190:	ff 1f       	adc	r31, r31
- 192:	eb 59       	subi	r30, 0x9B	; 155
- 194:	ff 4f       	sbci	r31, 0xFF	; 255
- 196:	01 90       	ld	r0, Z+
- 198:	f0 81       	ld	r31, Z
- 19a:	e0 2d       	mov	r30, r0
- 19c:	40 81       	ld	r20, Z
- 19e:	21 e0       	ldi	r18, 0x01	; 1
- 1a0:	30 e0       	ldi	r19, 0x00	; 0
- 1a2:	b9 01       	movw	r22, r18
- 1a4:	13 96       	adiw	r26, 0x03	; 3
- 1a6:	0c 90       	ld	r0, X
- 1a8:	02 c0       	rjmp	.+4      	; 0x1ae <GPIO_PIN_Give_Direction+0x6e>
- 1aa:	66 0f       	add	r22, r22
- 1ac:	77 1f       	adc	r23, r23
- 1ae:	0a 94       	dec	r0
- 1b0:	e2 f7       	brpl	.-8      	; 0x1aa <GPIO_PIN_Give_Direction+0x6a>
- 1b2:	cb 01       	movw	r24, r22
- 1b4:	80 95       	com	r24
- 1b6:	84 23       	and	r24, r20
- 1b8:	80 83       	st	Z, r24
+ 18e:	dc 01       	movw	r26, r24
+ 190:	12 96       	adiw	r26, 0x02	; 2
+ 192:	ec 91       	ld	r30, X
+ 194:	12 97       	sbiw	r26, 0x02	; 2
+ 196:	f0 e0       	ldi	r31, 0x00	; 0
+ 198:	ee 0f       	add	r30, r30
+ 19a:	ff 1f       	adc	r31, r31
+ 19c:	e7 59       	subi	r30, 0x97	; 151
+ 19e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1a0:	01 90       	ld	r0, Z+
+ 1a2:	f0 81       	ld	r31, Z
+ 1a4:	e0 2d       	mov	r30, r0
+ 1a6:	40 81       	ld	r20, Z
+ 1a8:	21 e0       	ldi	r18, 0x01	; 1
+ 1aa:	30 e0       	ldi	r19, 0x00	; 0
+ 1ac:	b9 01       	movw	r22, r18
+ 1ae:	13 96       	adiw	r26, 0x03	; 3
+ 1b0:	0c 90       	ld	r0, X
+ 1b2:	02 c0       	rjmp	.+4      	; 0x1b8 <GPIO_PIN_Give_Direction+0x6e>
+ 1b4:	66 0f       	add	r22, r22
+ 1b6:	77 1f       	adc	r23, r23
+ 1b8:	0a 94       	dec	r0
+ 1ba:	e2 f7       	brpl	.-8      	; 0x1b4 <GPIO_PIN_Give_Direction+0x6a>
+ 1bc:	cb 01       	movw	r24, r22
+ 1be:	80 95       	com	r24
+ 1c0:	84 23       	and	r24, r20
+ 1c2:	80 83       	st	Z, r24
 	}
 	return Ret ;
 }
 
 STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
 	STD_ReturnType Ret = RET_OK ;
- 1ba:	81 e0       	ldi	r24, 0x01	; 1
- 1bc:	08 95       	ret
+ 1c4:	81 e0       	ldi	r24, 0x01	; 1
+ 1c6:	08 95       	ret
 	if(NULL == _pin){
 		Ret = RET_NOT_OK ;
- 1be:	80 e0       	ldi	r24, 0x00	; 0
- 1c0:	08 95       	ret
+ 1c8:	80 e0       	ldi	r24, 0x00	; 0
+ 1ca:	08 95       	ret
 	}
 	return Ret ;
 }
 
 STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION _direction){
 	STD_ReturnType Ret = RET_OK ;
- 1c2:	81 e0       	ldi	r24, 0x01	; 1
+ 1cc:	81 e0       	ldi	r24, 0x01	; 1
 			RESET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
 		}
 		else {/*nothing*/}
 	}
 	return Ret ;
 }
- 1c4:	08 95       	ret
+ 1ce:	08 95       	ret
 
-000001c6 <GPIO_PIN_Initialize>:
+000001d0 <GPIO_PIN_Initialize>:
 #include "GPIO.h"
 volatile uint8 *PORT_REG[] = { &PORTB, &PORTC, &PORTD };
 volatile uint8 *DDR_REG[] = { &DDRB, &DDRC, &DDRD };
 	
 /**************************************Pin Functions******************************************/
 STD_ReturnType GPIO_PIN_Initialize(GPIO_PIN_CONFIG *_pin){
- 1c6:	cf 93       	push	r28
- 1c8:	df 93       	push	r29
+ 1d0:	cf 93       	push	r28
+ 1d2:	df 93       	push	r29
 	STD_ReturnType Ret = RET_OK ;
 	if(NULL == _pin){
- 1ca:	00 97       	sbiw	r24, 0x00	; 0
- 1cc:	39 f0       	breq	.+14     	; 0x1dc <GPIO_PIN_Initialize+0x16>
- 1ce:	ec 01       	movw	r28, r24
+ 1d4:	00 97       	sbiw	r24, 0x00	; 0
+ 1d6:	39 f0       	breq	.+14     	; 0x1e6 <GPIO_PIN_Initialize+0x16>
+ 1d8:	ec 01       	movw	r28, r24
 		Ret = RET_NOT_OK ;
 	}
 	else{
 		/*Direction Initialization */
 		Ret = GPIO_PIN_Give_Direction(_pin ,_pin->pin_direction);
- 1d0:	69 81       	ldd	r22, Y+1	; 0x01
- 1d2:	b6 df       	rcall	.-148    	; 0x140 <GPIO_PIN_Give_Direction>
+ 1da:	69 81       	ldd	r22, Y+1	; 0x01
+ 1dc:	b6 df       	rcall	.-148    	; 0x14a <GPIO_PIN_Give_Direction>
 		/*Logic Initialization */
 		Ret = GPIO_PIN_Write_logic(_pin,_pin->pin_logic);
- 1d4:	68 81       	ld	r22, Y
- 1d6:	ce 01       	movw	r24, r28
- 1d8:	50 df       	rcall	.-352    	; 0x7a <GPIO_PIN_Write_logic>
- 1da:	01 c0       	rjmp	.+2      	; 0x1de <GPIO_PIN_Initialize+0x18>
+ 1de:	68 81       	ld	r22, Y
+ 1e0:	ce 01       	movw	r24, r28
+ 1e2:	50 df       	rcall	.-352    	; 0x84 <GPIO_PIN_Write_logic>
+ 1e4:	01 c0       	rjmp	.+2      	; 0x1e8 <GPIO_PIN_Initialize+0x18>
 	
 /**************************************Pin Functions******************************************/
 STD_ReturnType GPIO_PIN_Initialize(GPIO_PIN_CONFIG *_pin){
 	STD_ReturnType Ret = RET_OK ;
 	if(NULL == _pin){
 		Ret = RET_NOT_OK ;
- 1dc:	80 e0       	ldi	r24, 0x00	; 0
+ 1e6:	80 e0       	ldi	r24, 0x00	; 0
 		Ret = GPIO_PIN_Give_Direction(_pin ,_pin->pin_direction);
 		/*Logic Initialization */
 		Ret = GPIO_PIN_Write_logic(_pin,_pin->pin_logic);
 	}
 	return Ret ;
 }
- 1de:	df 91       	pop	r29
- 1e0:	cf 91       	pop	r28
- 1e2:	08 95       	ret
+ 1e8:	df 91       	pop	r29
+ 1ea:	cf 91       	pop	r28
+ 1ec:	08 95       	ret
 
-000001e4 <_exit>:
- 1e4:	f8 94       	cli
+000001ee <INT0_Init>:
+		else{
+			/*nothing*/
+		}
+	}
+	return status ;
+}
+ 1ee:	fc 01       	movw	r30, r24
+ 1f0:	9b b7       	in	r25, 0x3b	; 59
+ 1f2:	9f 7b       	andi	r25, 0xBF	; 191
+ 1f4:	9b bf       	out	0x3b, r25	; 59
+ 1f6:	91 b3       	in	r25, 0x11	; 17
+ 1f8:	9b 7f       	andi	r25, 0xFB	; 251
+ 1fa:	91 bb       	out	0x11, r25	; 17
+ 1fc:	25 b7       	in	r18, 0x35	; 53
+ 1fe:	93 81       	ldd	r25, Z+3	; 0x03
+ 200:	2c 7f       	andi	r18, 0xFC	; 252
+ 202:	93 70       	andi	r25, 0x03	; 3
+ 204:	92 2b       	or	r25, r18
+ 206:	95 bf       	out	0x35, r25	; 53
+ 208:	80 81       	ld	r24, Z
+ 20a:	91 81       	ldd	r25, Z+1	; 0x01
+ 20c:	90 93 79 00 	sts	0x0079, r25	; 0x800079 <INT0_InterruptHandler+0x1>
+ 210:	80 93 78 00 	sts	0x0078, r24	; 0x800078 <INT0_InterruptHandler>
+ 214:	8b b7       	in	r24, 0x3b	; 59
+ 216:	80 64       	ori	r24, 0x40	; 64
+ 218:	8b bf       	out	0x3b, r24	; 59
+ 21a:	78 94       	sei
+ 21c:	08 95       	ret
 
-000001e6 <__stop_program>:
- 1e6:	ff cf       	rjmp	.-2      	; 0x1e6 <__stop_program>
+0000021e <INT1_Init>:
+ 21e:	fc 01       	movw	r30, r24
+ 220:	9b b7       	in	r25, 0x3b	; 59
+ 222:	9f 77       	andi	r25, 0x7F	; 127
+ 224:	9b bf       	out	0x3b, r25	; 59
+ 226:	91 b3       	in	r25, 0x11	; 17
+ 228:	97 7f       	andi	r25, 0xF7	; 247
+ 22a:	91 bb       	out	0x11, r25	; 17
+ 22c:	25 b7       	in	r18, 0x35	; 53
+ 22e:	93 81       	ldd	r25, Z+3	; 0x03
+ 230:	23 7f       	andi	r18, 0xF3	; 243
+ 232:	9c 70       	andi	r25, 0x0C	; 12
+ 234:	92 2b       	or	r25, r18
+ 236:	95 bf       	out	0x35, r25	; 53
+ 238:	80 81       	ld	r24, Z
+ 23a:	91 81       	ldd	r25, Z+1	; 0x01
+ 23c:	90 93 77 00 	sts	0x0077, r25	; 0x800077 <__data_end+0x1>
+ 240:	80 93 76 00 	sts	0x0076, r24	; 0x800076 <__data_end>
+ 244:	8b b7       	in	r24, 0x3b	; 59
+ 246:	80 68       	ori	r24, 0x80	; 128
+ 248:	8b bf       	out	0x3b, r24	; 59
+ 24a:	78 94       	sei
+ 24c:	08 95       	ret
+
+0000024e <INTx_Initialize>:
+ 24e:	00 97       	sbiw	r24, 0x00	; 0
+ 250:	61 f0       	breq	.+24     	; 0x26a <INTx_Initialize+0x1c>
+ 252:	fc 01       	movw	r30, r24
+ 254:	22 81       	ldd	r18, Z+2	; 0x02
+ 256:	21 11       	cpse	r18, r1
+ 258:	03 c0       	rjmp	.+6      	; 0x260 <INTx_Initialize+0x12>
+ 25a:	c9 df       	rcall	.-110    	; 0x1ee <INT0_Init>
+ 25c:	81 e0       	ldi	r24, 0x01	; 1
+ 25e:	08 95       	ret
+ 260:	21 30       	cpi	r18, 0x01	; 1
+ 262:	29 f4       	brne	.+10     	; 0x26e <INTx_Initialize+0x20>
+ 264:	dc df       	rcall	.-72     	; 0x21e <INT1_Init>
+ 266:	81 e0       	ldi	r24, 0x01	; 1
+ 268:	08 95       	ret
+ 26a:	80 e0       	ldi	r24, 0x00	; 0
+ 26c:	08 95       	ret
+ 26e:	81 e0       	ldi	r24, 0x01	; 1
+ 270:	08 95       	ret
+
+00000272 <__vector_1>:
+	INT1_INTERRUPT_DISABLE();
+}
+
+
+/*-------------------------------------ISR Function-----------------------------------------*/
+ISR(INT0_vect){
+ 272:	1f 92       	push	r1
+ 274:	0f 92       	push	r0
+ 276:	0f b6       	in	r0, 0x3f	; 63
+ 278:	0f 92       	push	r0
+ 27a:	11 24       	eor	r1, r1
+ 27c:	2f 93       	push	r18
+ 27e:	3f 93       	push	r19
+ 280:	4f 93       	push	r20
+ 282:	5f 93       	push	r21
+ 284:	6f 93       	push	r22
+ 286:	7f 93       	push	r23
+ 288:	8f 93       	push	r24
+ 28a:	9f 93       	push	r25
+ 28c:	af 93       	push	r26
+ 28e:	bf 93       	push	r27
+ 290:	ef 93       	push	r30
+ 292:	ff 93       	push	r31
+	INT0_CLEAR_FLAG();
+ 294:	8a b7       	in	r24, 0x3a	; 58
+ 296:	8f 7b       	andi	r24, 0xBF	; 191
+ 298:	8a bf       	out	0x3a, r24	; 58
+	
+	if(INT0_InterruptHandler){
+ 29a:	e0 91 78 00 	lds	r30, 0x0078	; 0x800078 <INT0_InterruptHandler>
+ 29e:	f0 91 79 00 	lds	r31, 0x0079	; 0x800079 <INT0_InterruptHandler+0x1>
+ 2a2:	30 97       	sbiw	r30, 0x00	; 0
+ 2a4:	09 f0       	breq	.+2      	; 0x2a8 <__vector_1+0x36>
+		INT0_InterruptHandler();
+ 2a6:	09 95       	icall
+	}
+}
+ 2a8:	ff 91       	pop	r31
+ 2aa:	ef 91       	pop	r30
+ 2ac:	bf 91       	pop	r27
+ 2ae:	af 91       	pop	r26
+ 2b0:	9f 91       	pop	r25
+ 2b2:	8f 91       	pop	r24
+ 2b4:	7f 91       	pop	r23
+ 2b6:	6f 91       	pop	r22
+ 2b8:	5f 91       	pop	r21
+ 2ba:	4f 91       	pop	r20
+ 2bc:	3f 91       	pop	r19
+ 2be:	2f 91       	pop	r18
+ 2c0:	0f 90       	pop	r0
+ 2c2:	0f be       	out	0x3f, r0	; 63
+ 2c4:	0f 90       	pop	r0
+ 2c6:	1f 90       	pop	r1
+ 2c8:	18 95       	reti
+
+000002ca <__vector_2>:
+
+ISR(INT1_vect){
+ 2ca:	1f 92       	push	r1
+ 2cc:	0f 92       	push	r0
+ 2ce:	0f b6       	in	r0, 0x3f	; 63
+ 2d0:	0f 92       	push	r0
+ 2d2:	11 24       	eor	r1, r1
+ 2d4:	2f 93       	push	r18
+ 2d6:	3f 93       	push	r19
+ 2d8:	4f 93       	push	r20
+ 2da:	5f 93       	push	r21
+ 2dc:	6f 93       	push	r22
+ 2de:	7f 93       	push	r23
+ 2e0:	8f 93       	push	r24
+ 2e2:	9f 93       	push	r25
+ 2e4:	af 93       	push	r26
+ 2e6:	bf 93       	push	r27
+ 2e8:	ef 93       	push	r30
+ 2ea:	ff 93       	push	r31
+	INT1_CLEAR_FLAG();
+ 2ec:	8a b7       	in	r24, 0x3a	; 58
+ 2ee:	8f 77       	andi	r24, 0x7F	; 127
+ 2f0:	8a bf       	out	0x3a, r24	; 58
+	
+	if(INT1_InterruptHandler){
+ 2f2:	e0 91 76 00 	lds	r30, 0x0076	; 0x800076 <__data_end>
+ 2f6:	f0 91 77 00 	lds	r31, 0x0077	; 0x800077 <__data_end+0x1>
+ 2fa:	30 97       	sbiw	r30, 0x00	; 0
+ 2fc:	09 f0       	breq	.+2      	; 0x300 <__vector_2+0x36>
+		INT1_InterruptHandler();
+ 2fe:	09 95       	icall
+	}
+}
+ 300:	ff 91       	pop	r31
+ 302:	ef 91       	pop	r30
+ 304:	bf 91       	pop	r27
+ 306:	af 91       	pop	r26
+ 308:	9f 91       	pop	r25
+ 30a:	8f 91       	pop	r24
+ 30c:	7f 91       	pop	r23
+ 30e:	6f 91       	pop	r22
+ 310:	5f 91       	pop	r21
+ 312:	4f 91       	pop	r20
+ 314:	3f 91       	pop	r19
+ 316:	2f 91       	pop	r18
+ 318:	0f 90       	pop	r0
+ 31a:	0f be       	out	0x3f, r0	; 63
+ 31c:	0f 90       	pop	r0
+ 31e:	1f 90       	pop	r1
+ 320:	18 95       	reti
+
+00000322 <_exit>:
+ 322:	f8 94       	cli
+
+00000324 <__stop_program>:
+ 324:	ff cf       	rjmp	.-2      	; 0x324 <__stop_program>

@@ -30,8 +30,8 @@ typedef enum {
 	GPIO_PIN_LOGIC_HIGH
 }GPIO_PIN_LOGIC;
 typedef enum {
-	GPIO_PIN_OUTPUT = 0 ,
-	GPIO_PIN_INPUT
+	GPIO_PIN_INPUT = 0 ,
+	GPIO_PIN_OUTPUT
 }GPIO_PIN_DIRECTION;
 typedef enum {
 	GPIO_PORTB ,

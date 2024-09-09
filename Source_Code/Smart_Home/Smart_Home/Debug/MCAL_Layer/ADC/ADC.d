@@ -1,11 +1,10 @@
-MCAL_Layer/Interrupt/External_Interrupt.d \
- MCAL_Layer/Interrupt/External_Interrupt.o: \
- ../MCAL_Layer/Interrupt/External_Interrupt.c \
- ../MCAL_Layer/Interrupt/External_Interrupt.h \
- ../MCAL_Layer/Interrupt/Interrupt_CFG.h \
- ../MCAL_Layer/Interrupt/../GPIO.h \
- ../MCAL_Layer/Interrupt/../STD_DataType.h \
- ../MCAL_Layer/Interrupt/../STD_Library.h \
+MCAL_Layer/ADC/ADC.d MCAL_Layer/ADC/ADC.o: ../MCAL_Layer/ADC/ADC.c \
+ ../MCAL_Layer/ADC/ADC.h \
+ ../MCAL_Layer/ADC/../Interrupt/Internal_Interrupt.h \
+ ../MCAL_Layer/ADC/../Interrupt/Interrupt_CFG.h \
+ ../MCAL_Layer/ADC/../Interrupt/../GPIO.h \
+ ../MCAL_Layer/ADC/../Interrupt/../STD_DataType.h \
+ ../MCAL_Layer/ADC/../Interrupt/../STD_Library.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -25,17 +24,20 @@ MCAL_Layer/Interrupt/External_Interrupt.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
+ ../MCAL_Layer/ADC/../GPIO.h
 
-../MCAL_Layer/Interrupt/External_Interrupt.h:
+../MCAL_Layer/ADC/ADC.h:
 
-../MCAL_Layer/Interrupt/Interrupt_CFG.h:
+../MCAL_Layer/ADC/../Interrupt/Internal_Interrupt.h:
 
-../MCAL_Layer/Interrupt/../GPIO.h:
+../MCAL_Layer/ADC/../Interrupt/Interrupt_CFG.h:
 
-../MCAL_Layer/Interrupt/../STD_DataType.h:
+../MCAL_Layer/ADC/../Interrupt/../GPIO.h:
 
-../MCAL_Layer/Interrupt/../STD_Library.h:
+../MCAL_Layer/ADC/../Interrupt/../STD_DataType.h:
+
+../MCAL_Layer/ADC/../Interrupt/../STD_Library.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -76,3 +78,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h:
+
+../MCAL_Layer/ADC/../GPIO.h:

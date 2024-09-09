@@ -1,7 +1,7 @@
-MCAL_Layer/Interrupt/External_Interrupt.d \
- MCAL_Layer/Interrupt/External_Interrupt.o: \
- ../MCAL_Layer/Interrupt/External_Interrupt.c \
- ../MCAL_Layer/Interrupt/External_Interrupt.h \
+MCAL_Layer/Interrupt/Internal_Interrupt.d \
+ MCAL_Layer/Interrupt/Internal_Interrupt.o: \
+ ../MCAL_Layer/Interrupt/Internal_Interrupt.c \
+ ../MCAL_Layer/Interrupt/Internal_Interrupt.h \
  ../MCAL_Layer/Interrupt/Interrupt_CFG.h \
  ../MCAL_Layer/Interrupt/../GPIO.h \
  ../MCAL_Layer/Interrupt/../STD_DataType.h \
@@ -27,7 +27,7 @@ MCAL_Layer/Interrupt/External_Interrupt.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h
 
-../MCAL_Layer/Interrupt/External_Interrupt.h:
+../MCAL_Layer/Interrupt/Internal_Interrupt.h:
 
 ../MCAL_Layer/Interrupt/Interrupt_CFG.h:
 

@@ -33,14 +33,20 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../ECU_Layer/RGB_Mdule \
 ../MCAL_Layer \
-../MCAL_Layer/Interrupt
+../MCAL_Layer/Interrupt \
+../MCAL_Layer/ADC \
+../ECU_Layer
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../ECU_Layer/RGB_Mdule/RGB.c \
 ../main.c \
+../MCAL_Layer/ADC/ADC.c \
 ../MCAL_Layer/GPIO.c \
+../MCAL_Layer/Interrupt/Internal_Interrupt.c \
 ../MCAL_Layer/Interrupt/External_Interrupt.c
 
 
@@ -51,23 +57,35 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+ECU_Layer/RGB_Mdule/RGB.o \
 main.o \
+MCAL_Layer/ADC/ADC.o \
 MCAL_Layer/GPIO.o \
+MCAL_Layer/Interrupt/Internal_Interrupt.o \
 MCAL_Layer/Interrupt/External_Interrupt.o
 
 OBJS_AS_ARGS +=  \
+ECU_Layer/RGB_Mdule/RGB.o \
 main.o \
+MCAL_Layer/ADC/ADC.o \
 MCAL_Layer/GPIO.o \
+MCAL_Layer/Interrupt/Internal_Interrupt.o \
 MCAL_Layer/Interrupt/External_Interrupt.o
 
 C_DEPS +=  \
+ECU_Layer/RGB_Mdule/RGB.d \
 main.d \
+MCAL_Layer/ADC/ADC.d \
 MCAL_Layer/GPIO.d \
+MCAL_Layer/Interrupt/Internal_Interrupt.d \
 MCAL_Layer/Interrupt/External_Interrupt.d
 
 C_DEPS_AS_ARGS +=  \
+ECU_Layer/RGB_Mdule/RGB.d \
 main.d \
+MCAL_Layer/ADC/ADC.d \
 MCAL_Layer/GPIO.d \
+MCAL_Layer/Interrupt/Internal_Interrupt.d \
 MCAL_Layer/Interrupt/External_Interrupt.d
 
 OUTPUT_FILE_PATH +=Smart_Home.elf
@@ -84,6 +102,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+ECU_Layer/RGB_Mdule/RGB.o: ../ECU_Layer/RGB_Mdule/RGB.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega8 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega8" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./main.o: .././main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -91,7 +116,21 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
+MCAL_Layer/ADC/ADC.o: ../MCAL_Layer/ADC/ADC.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega8 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega8" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 MCAL_Layer/GPIO.o: ../MCAL_Layer/GPIO.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega8 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega8" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL_Layer/Interrupt/Internal_Interrupt.o: ../MCAL_Layer/Interrupt/Internal_Interrupt.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega8 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega8" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

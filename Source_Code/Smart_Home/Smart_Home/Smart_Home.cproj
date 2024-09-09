@@ -133,16 +133,34 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ECU_Layer\RGB_Mdule\RGB.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ECU_Layer\RGB_Mdule\RGB.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL_Layer\ADC\ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL_Layer\ADC\ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL_Layer\GPIO.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL_Layer\GPIO.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL_Layer\Interrupt\Internal_Interrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL_Layer\Interrupt\Internal_Interrupt.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL_Layer\Interrupt\Interrupt_CFG.h">
@@ -162,8 +180,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ECU_Layer\RGB_Mdule" />
     <Folder Include="MCAL_Layer" />
     <Folder Include="MCAL_Layer\Interrupt" />
+    <Folder Include="MCAL_Layer\ADC" />
+    <Folder Include="ECU_Layer" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

@@ -32,6 +32,7 @@ STD_ReturnType INTx_Initialize(const INTx_CONFG* _int){
 		else{
 			/*nothing*/
 		}
+		sei();
 	}
 	return status ;
 }
@@ -69,7 +70,6 @@ static void INT0_Init(const INTx_CONFG* _int){
 	INT0_InterruptHandler = _int->InterruptManager;
 	// Enable Interrupt 0
 	INT0_INTERRUPT_ENBALE();
-	sei();
 }
 
 static void INT0_DEInit(const INTx_CONFG* _int){
@@ -89,7 +89,6 @@ static void INT1_Init(const INTx_CONFG* _int){
 	INT1_InterruptHandler = _int->InterruptManager;
 	// Enable Interrupt 1
 	INT1_INTERRUPT_ENBALE();
-	sei();
 }
 
 static void INT1_DEInit(const INTx_CONFG* _int){

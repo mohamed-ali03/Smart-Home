@@ -8,7 +8,7 @@
 #include "GPIO.h"
 volatile uint8 *PORT_REG[] = { &PORTB, &PORTC, &PORTD };
 volatile uint8 *DDR_REG[] = { &DDRB, &DDRC, &DDRD };
-	
+volatile uint8 *PIN_REG[] = { &PINB, &PINC, &PIND };
 /**************************************Pin Functions******************************************/
 STD_ReturnType GPIO_PIN_Initialize(GPIO_PIN_CONFIG *_pin){
 	STD_ReturnType Ret = RET_OK ;
@@ -31,10 +31,10 @@ STD_ReturnType GPIO_PIN_Write_logic(GPIO_PIN_CONFIG *_pin,GPIO_PIN_LOGIC _logic)
 	}
 	else{
 		if(GPIO_PIN_LOGIC_LOW == _logic ){
-			RESET_BIN(*PORT_REG[_pin->pin_port],_pin->pin_num);
+			*PORT_REG[_pin->pin_port] &= ~(1 << _pin->pin_num);
 		}
 		else if (GPIO_PIN_LOGIC_HIGH == _logic ){
-			SET_BIN(*PORT_REG[_pin->pin_port],_pin->pin_num);
+			*PORT_REG[_pin->pin_port] |= (1 << _pin->pin_num);
 		}
 		else {/*nothing*/}
 	}
@@ -57,7 +57,7 @@ STD_ReturnType GPIO_PIN_Read_Logic(GPIO_PIN_CONFIG *_pin,GPIO_PIN_LOGIC *_logic)
 		Ret = RET_NOT_OK ;
 	}
 	else{
-		*_logic = READ_BIN(*PORT_REG[_pin->pin_port],_pin->pin_num);
+		*_logic = READ_BIN(*PIN_REG[_pin->pin_port],_pin->pin_num);
 	}
 	return Ret ;
 }
@@ -69,10 +69,10 @@ STD_ReturnType GPIO_PIN_Give_Direction(GPIO_PIN_CONFIG *_pin,GPIO_PIN_DIRECTION 
 	}
 	else{
 		if(GPIO_PIN_OUTPUT ==  _direction){
-			SET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
+			*DDR_REG[_pin->pin_port] |= (1 << _pin->pin_num);
 		}
 		else if (GPIO_PIN_INPUT  ==  _direction){
-			RESET_BIN(*DDR_REG[_pin->pin_port],_pin->pin_num);
+			*DDR_REG[_pin->pin_port] &= ~(1 << _pin->pin_num);
 		}
 		else {/*nothing*/}
 	}

@@ -22,7 +22,7 @@ STD_ReturnType ADC_Initialize(const ADC_CONFIG* ADC_obj){
 		// Select the Prescalar Value
 		ADC_SELECT_PRESCALAR_VALUE(ADC_obj->prescalar_val);
 		// Configure pins(PC0:PC5) as input pins
-		DDRC = 0x00;
+		//DDRC = 0x00;
 		//Enable ADC Module
 		ADC_ENABLE();
 	}

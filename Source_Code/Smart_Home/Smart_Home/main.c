@@ -4,84 +4,161 @@
  * Created: 9/7/2024 10:21:53 PM
  * Author : Team 10 
  */ 
-#define F_CPU 1000000U
-
 #include "main.h"
-
-STD_ReturnType status = RET_OK ;
-
-ADC_CONFIG adc = {.prescalar_val = ADC_PRESCALAR_2 ,.volt_ref = ADC_AVCC_VOLT_REF};
-
-ADCx_INPUT_Channal temp_sensor = ADC6_;
-ADCx_INPUT_Channal lighting_sensor = ADC7_;
-INTx_CONFG	   PIR_Sensor = {.con_reg = INTx_RISING_EDGE_INTERRUPT ,.InterruptManager = PIR_Sense , .intx = INT0_};
-
-
-GPIO_PIN_CONFIG led = {.pin_direction = GPIO_PIN_OUTPUT , .pin_logic = GPIO_PIN_LOGIC_LOW ,.pin_num = GPIO_PIN4 ,.pin_port = GPIO_PORTD};
-	
-RGB_LED rgb = {.pin0[0].pin_direction = GPIO_PIN_OUTPUT,.pin0[0].pin_logic = GPIO_PIN_LOGIC_LOW,.pin0[0].pin_num = GPIO_PIN0,.pin0[0].pin_port = GPIO_PORTD,
-			   .pin0[1].pin_direction = GPIO_PIN_OUTPUT,.pin0[1].pin_logic = GPIO_PIN_LOGIC_LOW,.pin0[1].pin_num = GPIO_PIN1,.pin0[1].pin_port = GPIO_PORTD
-			  };
-			  
-sint16 value ;
-sint16 tmp   ;
-uint16 light ;
-uint32 flag  = 0 ;
-
+uint8 *password = "1234";
 
 
 int main(void)
-{	
+{
 	Initialize();
+	USART_SendStr("Welcome , Enter the password on Keypad \n\r");
     /* Replace with your application code */
     while (1) 
     {
-		Sensors();
+		// disable the keypad if the user enter the password true
+		if(!IsPassTrue){
+			status = Keypad_Get_Check_Password(&keypad__,EnterPass,&IsPassTrue,&Door_Flag);
+		}
+		
+		if(IsPassTrue || Door_Flag){
+			// make the door open and close one time 
+			if(flag){
+				Open_Door();
+				if(Door_Flag){
+					USART_SendStr("Door is opened using face detection. Welcome to your Home (: \n\r");
+				}
+				else if(IsPassTrue){
+					USART_SendStr("Door is opened using Password . Welcome to your Home (: \n\r");
+				}
+				status = Buzzer_Stop(&buzzer_);
+				flag = False;
+			}
+			
+			// if anyone in the house get sense from the sensors 
+			if (PIR_Flag){
+				Temperature();
+				Lighting();
+			}
+			//PrintStatus();
+		}
+		else{
+			USART_SendStr("Password is wrong ,Try again\n\r");
+			// if you enter the password wrong three times the buzzer will play 
+			status = Buzzer_Play(&buzzer_);
+		}
+			
     }
 	return 0 ;
 }
 
+
+																					/* Initialize all Modules and devices */
 void Initialize (void){
-	status = GPIO_PIN_Initialize(&led);
-	status = INTx_Initialize(&PIR_Sensor);
+	// Internal peripherals 
+	status = PWM_Init(&PWM);
+	PWM_Write(led_brightness,lighting_led);
 	status = ADC_Initialize(&adc);
+	USART_Init();
+	// External interrrupt
+	status = INTx_Initialize(&PIR_Sensor);
+	status = INTx_Initialize((&Door_Status));
+	// output moduls 
 	status = RGB_LED_INIT(&rgb);
+	status = Door_Motor_Init(&door_motor);
+	status = Keypad_Init(&keypad__,password);
+	status = Buzzer_INIT(&buzzer_);
 }
 
-// if PIR sense any motion it will set flag and enable the other sensors 
+																					/* take the reading from the sensors  and make an action */
+
+// INT0 : if PIR sense any motion it will set flag and enable the other sensors
 void PIR_Sense(void){
-	flag = 1 ;
+	PIR_Flag = True ;
+}
+																					/* interaction with computer vision */
+// INT1 : when we need to open the door
+void Door_OpenCV(void){
+	Door_Flag = True ;
 }
 
-
-// Sensors (Temperature , lighting )
-void Sensors (void){
-	if(flag){
-		// sense the temperature of the room
-		status = ADC_Read(temp_sensor,&value);
-		tmp = (uint16)(ceil(((value * 5.0/1024.0)-0.5)*100.0));
-		if(tmp < 20 ){
-			status = RGB_LED_BLUE(&rgb);
-		}
-		else if(tmp >= 20 && tmp <30) {
-			status = RGB_LED_GREEN(&rgb);
-		}
-		else if(tmp >= 30){
-			status = RGB_LED_RED(&rgb);
-		}
-		else {
-			/*nothing*/
-		}
-		
-		// measure the lighting of the room
-		status = ADC_Read(lighting_sensor,&value);
-		light = (uint16)(ceil(value * 100.0/765.0));
-		if(light > 95 ){
-			status = GPIO_PIN_Write_logic(&led,GPIO_PIN_LOGIC_HIGH);
-		}
-		else{
-			status = GPIO_PIN_Write_logic(&led,GPIO_PIN_LOGIC_LOW);
-		}
+void Temperature(void){
+	// sense the temperature of the room
+	status = ADC_Read(temp_sensor,&value);
+	// Convert the ADC value to temperature in degrees Celsius.
+	TMP = (uint16)(round(((value * 5.0/1024.0)-0.5)*100.0));
+	// choose the suitable state
+	if(TMP < 20 ){
+		motor_speed =  FAN_STOP ;
+		PWM_Write(motor_speed,motor_en);
+		status = RGB_LED_BLUE(&rgb);
+	}
+	else if(TMP >= 20 && TMP <=30) {
+		motor_speed = (uint16)(round(512 + (TMP-20) * 511/10.0) );
+		PWM_Write(motor_speed,motor_en);
+		status = RGB_LED_GREEN(&rgb);
+	}
+	else if(TMP > 30){
+		motor_speed = FAN_MAX_SPEED ;
+		PWM_Write(motor_speed,motor_en);
+		status = RGB_LED_RED(&rgb);
+	}
+	else {
+		/*nothing*/
 	}
 }
+
+
+void Lighting(void) {
+	// Read lighting sensor ADC value and convert it to a percentage (0-100%) based on a 403 max value.
+	status = ADC_Read(lighting_sensor,&value);
+	Light = (uint16)(100 - round(value * 100.0/403.0));
+	// Convert the light percentage (0-100%) to a PWM value (0-1023) for LED brightness control.
+	led_brightness = (uint16)(round(Light *1023.0/100));
+	PWM_Write(led_brightness,lighting_led);
+}
+															
+
+// open door
+void Open_Door(void){
+	status = Door_Motor_Open(&door_motor);
+	_delay_ms(1000);
+	status = Door_Motor_Stop(&door_motor);
+	_delay_ms(5000);
+	status = Door_Motor_Close(&door_motor);
+	_delay_ms(1000);
+	status = Door_Motor_Stop(&door_motor);
+}
+
+
+
+void PrintStatus(void){
+	USART_SendStr("Temperature : ");
+	ShortToString(TMP,str_status);
+	USART_SendStr(str_status);
+	USART_SendStr(" ---------- Lighting : ");
+	ShortToString(led_brightness,str_status);
+	USART_SendStr(str_status);
+	USART_SendStr("\r\n");
+}
+
+																				/*Convert Integer to String */
+void ShortToString(sint16 num, uint8 *str) {
+	uint8 *str_temp = str;
+	uint16 int_temp ;
+	uint16 count ;
+	uint16 traverse_count = 0 ;
+	uint16 reverse_count;
+	
+	while(num >= 0){
+		int_temp = num % 10;
+		num /= 10 ;
+		for(count = 0 ; count <= 9 ; count++){
+			if (count == int_temp){
+				*str_temp++ = count + 48 ;
+			}
+		}
+		*str_temp = '\0';
+	}
+}
+
 

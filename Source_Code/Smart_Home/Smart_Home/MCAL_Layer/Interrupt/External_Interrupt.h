@@ -15,8 +15,8 @@
 /*-------------Macro Functions----------------*/
 
 // Define the Interrupt at Falling or Rising  or low level or at any change 
-#define INT0_SENSE_CONTROL(x)				(MCUCR = (MCUCR & 0xFC) | (x & 0x03))
-#define INT1_SENSE_CONTROL(x)				(MCUCR = (MCUCR & 0xF3) | (x & 0x0C))
+#define INT0_SENSE_CONTROL(x)				(MCUCR = (MCUCR & 0xFC) | (x << BIT0))
+#define INT1_SENSE_CONTROL(x)				(MCUCR = (MCUCR & 0xF3) | (x << BIT2))
 
 // Enable & Disable INT0 and INT1
 #define INT0_INTERRUPT_ENBALE()				(SET_BIN(GICR,6))

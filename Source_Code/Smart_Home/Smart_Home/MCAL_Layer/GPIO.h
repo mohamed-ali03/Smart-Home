@@ -23,6 +23,7 @@
 /***************************DATA TYPE****************************/
 extern volatile uint8 *PORT_REG[];
 extern volatile uint8 *DDR_REG[];
+extern volatile uint8 *PIN_REG[];
 
 
 typedef enum {

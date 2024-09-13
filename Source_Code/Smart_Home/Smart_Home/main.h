@@ -89,7 +89,7 @@ bool Door_Flag = False ;
 uint8 EnterPass[5];
 bool IsPassTrue = False;
 bool flag = True;			// to make the door open one time only 
-uint8 str_status[5] = {0};
+uint8 str_status[6] = {0};
 
 
 

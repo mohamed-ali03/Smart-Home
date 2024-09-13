@@ -39,14 +39,15 @@ int main(void)
 				Temperature();
 				Lighting();
 			}
-			//PrintStatus();
+			
+			// send the status(Temp , Light , Fan Speed) to virtual terminal using USART
+			PrintStatus();
 		}
 		else{
 			USART_SendStr("Password is wrong ,Try again\n\r");
 			// if you enter the password wrong three times the buzzer will play 
 			status = Buzzer_Play(&buzzer_);
 		}
-			
     }
 	return 0 ;
 }
@@ -129,35 +130,67 @@ void Open_Door(void){
 	status = Door_Motor_Stop(&door_motor);
 }
 
-
-
+																			/* Interact with virtual terminal */
+// send the status(Temp , Light , Fan Speed) to virtual terminal using USART
 void PrintStatus(void){
 	USART_SendStr("Temperature : ");
 	ShortToString(TMP,str_status);
 	USART_SendStr(str_status);
+	USART_SendStr(" ---------- Motor Speed : ");
+	ShortToString(motor_speed,str_status);
+	USART_SendStr(str_status);
 	USART_SendStr(" ---------- Lighting : ");
-	ShortToString(led_brightness,str_status);
+	ShortToString(Light,str_status);
 	USART_SendStr(str_status);
 	USART_SendStr("\r\n");
 }
 
 																				/*Convert Integer to String */
 void ShortToString(sint16 num, uint8 *str) {
-	uint8 *str_temp = str;
+	uint8 str_temp [5];
+	uint16 traverse_arr  = 0;
+
+	uint8 *str_traverse = str ;
+
 	uint16 int_temp ;
-	uint16 count ;
-	uint16 traverse_count = 0 ;
-	uint16 reverse_count;
-	
-	while(num >= 0){
-		int_temp = num % 10;
-		num /= 10 ;
-		for(count = 0 ; count <= 9 ; count++){
-			if (count == int_temp){
-				*str_temp++ = count + 48 ;
+	sint16 count ;
+
+	if(num == 0 ){
+		*str_traverse++ = '0';
+		*str_traverse = '\0';
+	}
+	else{
+		if(num < 0){
+			*str_traverse++ = '-';
+			*str_traverse = '\0';
+			num = ~num + 1 ;					// get inverse 2th complement
+		}
+		
+		while(num > 0){
+			int_temp = num % 10;
+			num /= 10 ;
+			switch (int_temp){
+				case 0 :str_temp[traverse_arr++] = '0';break;
+				case 1 :str_temp[traverse_arr++] = '1';break;
+				case 2 :str_temp[traverse_arr++] = '2';break;
+				case 3 :str_temp[traverse_arr++] = '3';break;
+				case 4 :str_temp[traverse_arr++] = '4';break;
+				case 5 :str_temp[traverse_arr++] = '5';break;
+				case 6 :str_temp[traverse_arr++] = '6';break;
+				case 7 :str_temp[traverse_arr++] = '7';break;
+				case 8 :str_temp[traverse_arr++] = '8';break;
+				case 9 :str_temp[traverse_arr++] = '9';break;
+				default :break;
+				
 			}
 		}
-		*str_temp = '\0';
+	}
+	
+	
+	
+	for(count = traverse_arr-1 ; count >= 0 ; count--){
+		*str_traverse++ = str_temp[count];
+		*str_traverse = '\0';
 	}
 }
 

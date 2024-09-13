@@ -15,7 +15,7 @@
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="888" x="24" flags="00000033" y="258" h="741" pid="1" iid="-1">
+   <POPUP w="888" x="0" flags="00000033" y="238" h="741" pid="1" iid="-1">
     <PROPERTIES>
      <ITEM name="Address Column Width">82</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -35,7 +35,7 @@
      <ITEM name="nItems">1</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1128" x="81" flags="00008023" y="369" h="647" pid="0" iid="25">
+   <POPUP w="1128" x="792" flags="00008023" y="317" h="647" pid="0" iid="25">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
@@ -167,15 +167,15 @@
      <ITEM name="TopLineAddress">00000020</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1397" x="484" flags="0000002b" y="378" h="552" pid="1" iid="1">
+   <POPUP w="1397" x="251" flags="0000002b" y="468" h="552" pid="1" iid="1">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"main",060E,0004,3515,3312,1
+     <ITEM name="Breakpoint 0">"main",07E2,0004,F5D4,3312,1
 </ITEM>
-     <ITEM name="Breakpoint 1">"main",0626,001C,032B,3312,1
+     <ITEM name="Breakpoint 1">"main",07E6,0008,4DC8,3312,1
 </ITEM>
-     <ITEM name="Breakpoint 2">"Temperature",0434,0004,FD38,3312,1
+     <ITEM name="Breakpoint 2">"PrintStatus",0788,0000,D4AB,3312,1
 </ITEM>
-     <ITEM name="Breakpoint 3">"Temperature",04C0,0090,856E,3312,1
+     <ITEM name="Breakpoint 3">"ShortToString",0686,0068,C6C1,3312,1
 </ITEM>
      <ITEM name="Breakpoint 4">"Temperature",04D2,00A2,0705,3312,1
 </ITEM>
@@ -185,13 +185,15 @@
 </ITEM>
      <ITEM name="Breakpoint 7">"Lighting",0542,0018,E671,3312,1
 </ITEM>
+     <ITEM name="Breakpoint 8">"ShortToString",0672,0068,1E9E,3312,1
+</ITEM>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
      <ITEM name="DISPLNUMS">No</ITEM>
      <ITEM name="DISPOPCODES">No</ITEM>
      <ITEM name="FIXUPBPTS">Yes</ITEM>
      <ITEM name="WordsOnly">No</ITEM>
-     <ITEM name="nBreakpoints">8</ITEM>
+     <ITEM name="nBreakpoints">4</ITEM>
     </PROPERTIES>
    </POPUP>
    <POPUP w="933" x="637" flags="0000000a" y="360" h="530" pid="2" iid="1">

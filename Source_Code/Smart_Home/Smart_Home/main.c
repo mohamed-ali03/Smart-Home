@@ -122,11 +122,11 @@ void Lighting(void) {
 // open door
 void Open_Door(void){
 	status = Door_Motor_Open(&door_motor);
-	_delay_ms(1000);
+	_delay_ms(3000);
 	status = Door_Motor_Stop(&door_motor);
-	_delay_ms(5000);
+	_delay_ms(10000);
 	status = Door_Motor_Close(&door_motor);
-	_delay_ms(1000);
+	_delay_ms(3000);
 	status = Door_Motor_Stop(&door_motor);
 }
 

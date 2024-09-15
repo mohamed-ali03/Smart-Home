@@ -45,17 +45,17 @@ PWM_CONFIG PWM = {.out_mode = CLEAR_SET ,.sel_clk = PWM_WITH_PRESCALAR_64};
 
 												// Input //
 // Sensors Declaration (temperature , lighting , Motion
-ADCx_INPUT_Channal temp_sensor = ADC6_;
-ADCx_INPUT_Channal lighting_sensor = ADC7_;
+ADCx_INPUT_Channal temp_sensor = ADC4_;
+ADCx_INPUT_Channal lighting_sensor = ADC5_;
 INTx_CONFG	   PIR_Sensor = {.con_reg = INTx_RISING_EDGE_INTERRUPT ,.InterruptManager = PIR_Sense , .intx = INT0_};
 INTx_CONFG	   Door_Status = {.con_reg = INTx_RISING_EDGE_INTERRUPT , .InterruptManager = Door_OpenCV , .intx = INT1_};
 Keypad_Config keypad__ = {.Rows[0].pin_direction = GPIO_PIN_INPUT,.Rows[0].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Rows[0].pin_num = GPIO_PIN0 ,.Rows[0].pin_port = GPIO_PORTC,
 						  .Rows[1].pin_direction = GPIO_PIN_INPUT,.Rows[1].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Rows[1].pin_num = GPIO_PIN1 ,.Rows[1].pin_port = GPIO_PORTC,
 						  .Rows[2].pin_direction = GPIO_PIN_INPUT,.Rows[2].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Rows[2].pin_num = GPIO_PIN2 ,.Rows[2].pin_port = GPIO_PORTC,
 						  .Rows[3].pin_direction = GPIO_PIN_INPUT,.Rows[3].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Rows[3].pin_num = GPIO_PIN3 ,.Rows[3].pin_port = GPIO_PORTC,
-						  .Columns[0].pin_direction = GPIO_PIN_OUTPUT,.Columns[0].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Columns[0].pin_num = GPIO_PIN4 ,.Columns[0].pin_port = GPIO_PORTC,
-						  .Columns[1].pin_direction = GPIO_PIN_OUTPUT,.Columns[1].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Columns[1].pin_num = GPIO_PIN5 ,.Columns[1].pin_port = GPIO_PORTC,
-						  .Columns[2].pin_direction = GPIO_PIN_OUTPUT,.Columns[2].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Columns[2].pin_num = GPIO_PIN6 ,.Columns[2].pin_port = GPIO_PORTD,
+						  .Columns[0].pin_direction = GPIO_PIN_OUTPUT,.Columns[0].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Columns[0].pin_num = GPIO_PIN5 ,.Columns[0].pin_port = GPIO_PORTB,
+						  .Columns[1].pin_direction = GPIO_PIN_OUTPUT,.Columns[1].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Columns[1].pin_num = GPIO_PIN6 ,.Columns[1].pin_port = GPIO_PORTB,
+						  .Columns[2].pin_direction = GPIO_PIN_OUTPUT,.Columns[2].pin_logic = GPIO_PIN_LOGIC_HIGH ,.Columns[2].pin_num = GPIO_PIN7 ,.Columns[2].pin_port = GPIO_PORTB,
 						  };
 	
 												// Output //

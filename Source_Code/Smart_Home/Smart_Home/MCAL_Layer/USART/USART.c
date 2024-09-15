@@ -13,7 +13,7 @@ void USART_Init(void) {
 	UBRRL = (unsigned char)ubrr_value;          // Low byte
 
 	// Enable transmitter (TXEN) in UCSRB
-	UCSRB = (1 << TXEN);
+	UCSRB = (1 << TXEN) | ( 1 << RXEN);
 
 	// Set frame format: 8 data bits, 1 stop bit, no parity
 	UCSRC = (1 << URSEL) | (1 << UCSZ0) | (1 << UCSZ1);

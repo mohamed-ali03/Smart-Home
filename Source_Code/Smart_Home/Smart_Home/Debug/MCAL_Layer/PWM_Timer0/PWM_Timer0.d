@@ -1,9 +1,8 @@
-main.d main.o: .././main.c .././main.h .././MCAL_Layer/MCAL_Modules.h \
- .././MCAL_Layer/Interrupt/External_Interrupt.h \
- .././MCAL_Layer/Interrupt/Interrupt_CFG.h \
- .././MCAL_Layer/Interrupt/../GPIO.h \
- .././MCAL_Layer/Interrupt/../STD_DataType.h \
- .././MCAL_Layer/Interrupt/../STD_Library.h \
+MCAL_Layer/PWM_Timer0/PWM_Timer0.d MCAL_Layer/PWM_Timer0/PWM_Timer0.o: \
+ ../MCAL_Layer/PWM_Timer0/PWM_Timer0.c \
+ ../MCAL_Layer/PWM_Timer0/PWM_Timer0.h ../MCAL_Layer/PWM_Timer0/../GPIO.h \
+ ../MCAL_Layer/PWM_Timer0/../STD_DataType.h \
+ ../MCAL_Layer/PWM_Timer0/../STD_Library.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -24,35 +23,15 @@ main.d main.o: .././main.c .././main.h .././MCAL_Layer/MCAL_Modules.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././MCAL_Layer/ADC/ADC.h \
- .././MCAL_Layer/ADC/../Interrupt/Internal_Interrupt.h \
- .././MCAL_Layer/ADC/../Interrupt/Interrupt_CFG.h \
- .././MCAL_Layer/ADC/../GPIO.h .././MCAL_Layer/PWM_Timer1/PWM_Timer1.h \
- .././MCAL_Layer/PWM_Timer1/../GPIO.h \
- .././MCAL_Layer/PWM_Timer2/PWM_Timer2.h \
- .././MCAL_Layer/PWM_Timer2/../GPIO.h .././MCAL_Layer/USART/USART.h \
- .././MCAL_Layer/USART/../GPIO.h .././ECU_Layer/ECU_Devices.h \
- .././ECU_Layer/RGB_Mdule/RGB.h \
- .././ECU_Layer/RGB_Mdule/../../MCAL_Layer/GPIO.h \
- .././ECU_Layer/Keypad/Keypad.h \
- .././ECU_Layer/Keypad/../../MCAL_Layer/GPIO.h \
- .././ECU_Layer/Buzzer/Buzzer.h \
- .././ECU_Layer/Buzzer/../../MCAL_LAYER/GPIO.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
-.././main.h:
+../MCAL_Layer/PWM_Timer0/PWM_Timer0.h:
 
-.././MCAL_Layer/MCAL_Modules.h:
+../MCAL_Layer/PWM_Timer0/../GPIO.h:
 
-.././MCAL_Layer/Interrupt/External_Interrupt.h:
+../MCAL_Layer/PWM_Timer0/../STD_DataType.h:
 
-.././MCAL_Layer/Interrupt/Interrupt_CFG.h:
-
-.././MCAL_Layer/Interrupt/../GPIO.h:
-
-.././MCAL_Layer/Interrupt/../STD_DataType.h:
-
-.././MCAL_Layer/Interrupt/../STD_Library.h:
+../MCAL_Layer/PWM_Timer0/../STD_Library.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -95,37 +74,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
-
-.././MCAL_Layer/ADC/ADC.h:
-
-.././MCAL_Layer/ADC/../Interrupt/Internal_Interrupt.h:
-
-.././MCAL_Layer/ADC/../Interrupt/Interrupt_CFG.h:
-
-.././MCAL_Layer/ADC/../GPIO.h:
-
-.././MCAL_Layer/PWM_Timer1/PWM_Timer1.h:
-
-.././MCAL_Layer/PWM_Timer1/../GPIO.h:
-
-.././MCAL_Layer/PWM_Timer2/PWM_Timer2.h:
-
-.././MCAL_Layer/PWM_Timer2/../GPIO.h:
-
-.././MCAL_Layer/USART/USART.h:
-
-.././MCAL_Layer/USART/../GPIO.h:
-
-.././ECU_Layer/ECU_Devices.h:
-
-.././ECU_Layer/RGB_Mdule/RGB.h:
-
-.././ECU_Layer/RGB_Mdule/../../MCAL_Layer/GPIO.h:
-
-.././ECU_Layer/Keypad/Keypad.h:
-
-.././ECU_Layer/Keypad/../../MCAL_Layer/GPIO.h:
-
-.././ECU_Layer/Buzzer/Buzzer.h:
-
-.././ECU_Layer/Buzzer/../../MCAL_LAYER/GPIO.h:

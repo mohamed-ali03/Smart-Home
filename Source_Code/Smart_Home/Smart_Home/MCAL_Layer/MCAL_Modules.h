@@ -12,7 +12,8 @@
 /*--------------------------------------MCAL Modules------------------------------------*/
 #include "Interrupt/External_Interrupt.h"
 #include "ADC/ADC.h"
-#include "PWM/PWM.h"
+#include "PWM_Timer1/PWM_Timer1.h"
+#include "PWM_Timer2/PWM_Timer2.h"
 #include "USART/USART.h"
 
 

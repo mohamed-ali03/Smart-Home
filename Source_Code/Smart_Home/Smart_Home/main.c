@@ -5,69 +5,73 @@
  * Author : Team 10 
  */ 
 #include "main.h"
-uint8 *password = "1234";
 
-
+uint8 var ;
 int main(void)
 {
 	Initialize();
-	USART_SendStr("Welcome , Enter the password on Keypad \n\r");
-    /* Replace with your application code */
+	USART_SendStr("Welcome\n\r");
     while (1) 
-    {
-		// disable the keypad if the user enter the password true
-		if(!IsPassTrue){
-			status = Keypad_Get_Check_Password(&keypad__,EnterPass,&IsPassTrue,&Door_Flag);
-		}
-		
-		if(IsPassTrue || Door_Flag){
-			// make the door open and close one time 
-			if(flag){
-				Open_Door();
-				if(Door_Flag){
-					USART_SendStr("Door is opened using face detection. Welcome to your Home (: \n\r");
-				}
-				else if(IsPassTrue){
-					USART_SendStr("Door is opened using Password . Welcome to your Home (: \n\r");
-				}
-				status = Buzzer_Stop(&buzzer_);
-				flag = False;
-			}
-			
-			// if anyone in the house get sense from the sensors 
-			if (PIR_Flag){
-				Temperature();
-				Lighting();
-			}
-			
-			// send the status(Temp , Light , Fan Speed) to virtual terminal using USART
-			PrintStatus();
-		}
-		else{
-			USART_SendStr("Password is wrong ,Try again\n\r");
-			// if you enter the password wrong three times the buzzer will play 
-			status = Buzzer_Play(&buzzer_);
-		}
+    {		
+		Open_Door();
+		wholeProject();
     }
 	return 0 ;
 }
 
-
-																					/* Initialize all Modules and devices */
+void wholeProject(void){
+	// computer vision part
+	if (cam_status == Face_Detected){
+		USART_SendStr("Door is opened using Face Detection\n\r");
+		Open_Door();
+	}
+	else if (cam_status == Face_Not_Detected) {
+		USART_SendStr("Your are not in the data base. please enter the password on keypad\n\r");
+		status = Keypad_Get_Check_Password(&keypad__,&EnterPass,&IsPassTrue,&cam_status);
+		if(IsPassTrue){
+			USART_SendStr("Door is opened using password\n\r");
+			status = Buzzer_Stop(&buzzer_);
+			Open_Door();
+		}
+		else {
+			USART_SendStr("password is not True .Please Try again\n\r");
+			status = Buzzer_Play(&buzzer_);
+		}
+	}
+	else if (cam_status == No_one )
+	{
+		/*nothing*/
+	}
+	
+	if(PIR_Flag){
+		while(count < 90000){
+			Temperature();
+			Lighting();
+			count++ ;
+		}
+		count = 0 ;
+	}
+	
+}
+			
+																		/* Initialize all Modules and devices */
 void Initialize (void){
-	// Internal peripherals 
-	status = PWM_Init(&PWM);
-	PWM_Write(led_brightness,lighting_led);
-	status = ADC_Initialize(&adc);
-	USART_Init();
+	// Internal peripherals
+	status = PWM_Init(&PWM);			// Lighting control and fan motor using PWM with timer1			
+	PWM_init_Timer2();					// servo motor using PWM with timer2
+	status = ADC_Initialize(&adc);		// temperature and lighting sensor using ADC
+	//USART_Init(&usart);						// communicate with virtual terminal 
 	// External interrrupt
-	status = INTx_Initialize(&PIR_Sensor);
-	status = INTx_Initialize((&Door_Status));
-	// output moduls 
-	status = RGB_LED_INIT(&rgb);
-	status = Door_Motor_Init(&door_motor);
-	status = Keypad_Init(&keypad__,password);
-	status = Buzzer_INIT(&buzzer_);
+	status = INTx_Initialize(&PIR_Sensor);		// motion sensor using external interrrupt(INT)
+	// output moduls
+	status = RGB_LED_INIT(&rgb);				// RGB led init
+	status = Keypad_Init(&keypad__,password);	// Keypad init 
+	status = Buzzer_INIT(&buzzer_);				// Buzzer init
+																					
+	// intialize the status of the fan and lighing
+	PWM_Write(FAN_STOP,motor_en);				// make motor off at begin
+	PWM_Write(0,lighting_led);					// make light off at begin 
+																					
 }
 
 																					/* take the reading from the sensors  and make an action */
@@ -77,16 +81,27 @@ void PIR_Sense(void){
 	PIR_Flag = True ;
 }
 																					/* interaction with computer vision */
-// INT1 : when we need to open the door
-void Door_OpenCV(void){
-	Door_Flag = True ;
-}
+// when USART module receive 1 the interrupt will excute this function
+void Open_Door(void){
+		// Example: Move servo to 0 degrees
+		set_servo_angle(0);
 
+		// Example: Move servo to 180 degrees
+		set_servo_angle(180);
+		_delay_ms(1000);
+
+		// Example: Move servo to 180 degrees
+		set_servo_angle(0);
+}
+																	/* sense temperature and make an action according to it */
 void Temperature(void){
 	// sense the temperature of the room
-	status = ADC_Read(temp_sensor,&value);
+	status = ADC_Read(temp_sensor,&LD35DZ_Reading);
 	// Convert the ADC value to temperature in degrees Celsius.
-	TMP = (uint16)(round(((value * 5.0/1024.0)-0.5)*100.0));
+	//TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 - 0.5)*100));	// for tmp36
+	TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 )*100));			// for ld35dz
+	
+	//TMP = 25;
 	// choose the suitable state
 	if(TMP < 20 ){
 		motor_speed =  FAN_STOP ;
@@ -108,28 +123,14 @@ void Temperature(void){
 	}
 }
 
-
+																			/* sense the lighing and make an action according to it */
 void Lighting(void) {
 	// Read lighting sensor ADC value and convert it to a percentage (0-100%) based on a 403 max value.
-	status = ADC_Read(lighting_sensor,&value);
-	Light = (uint16)(100 - round(value * 100.0/403.0));
-	// Convert the light percentage (0-100%) to a PWM value (0-1023) for LED brightness control.
-	led_brightness = (uint16)(round(Light *1023.0/100));
+	status = ADC_Read(lighting_sensor,&LDR_Reading);
+	led_brightness = 1023 - LDR_Reading ;
 	PWM_Write(led_brightness,lighting_led);
+	Light = (uint16)(100 - round(LDR_Reading * 100.0/1023.0));
 }
-															
-
-// open door
-void Open_Door(void){
-	status = Door_Motor_Open(&door_motor);
-	_delay_ms(3000);
-	status = Door_Motor_Stop(&door_motor);
-	_delay_ms(10000);
-	status = Door_Motor_Close(&door_motor);
-	_delay_ms(3000);
-	status = Door_Motor_Stop(&door_motor);
-}
-
 																			/* Interact with virtual terminal */
 // send the status(Temp , Light , Fan Speed) to virtual terminal using USART
 void PrintStatus(void){

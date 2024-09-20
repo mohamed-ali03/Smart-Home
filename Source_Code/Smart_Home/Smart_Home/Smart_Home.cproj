@@ -139,12 +139,6 @@
     <Compile Include="ECU_Layer\Buzzer\Buzzer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="ECU_Layer\Door_Motor\Door_Motor.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ECU_Layer\Door_Motor\Door_Motor.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="ECU_Layer\ECU_Devices.h">
       <SubType>compile</SubType>
     </Compile>
@@ -196,10 +190,16 @@
     <Compile Include="MCAL_Layer\MCAL_Modules.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCAL_Layer\PWM\PWM.c">
+    <Compile Include="MCAL_Layer\PWM_Timer1\PWM_Timer1.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCAL_Layer\PWM\PWM.h">
+    <Compile Include="MCAL_Layer\PWM_Timer1\PWM_Timer1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL_Layer\PWM_Timer2\PWM_Timer2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL_Layer\PWM_Timer2\PWM_Timer2.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL_Layer\STD_DataType.h">
@@ -216,7 +216,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ECU_Layer\Door_Motor" />
     <Folder Include="ECU_Layer\Keypad" />
     <Folder Include="ECU_Layer\Buzzer" />
     <Folder Include="ECU_Layer\RGB_Mdule" />
@@ -224,8 +223,9 @@
     <Folder Include="MCAL_Layer\Interrupt" />
     <Folder Include="MCAL_Layer\ADC" />
     <Folder Include="ECU_Layer" />
+    <Folder Include="MCAL_Layer\PWM_Timer2" />
     <Folder Include="MCAL_Layer\USART" />
-    <Folder Include="MCAL_Layer\PWM" />
+    <Folder Include="MCAL_Layer\PWM_Timer1" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

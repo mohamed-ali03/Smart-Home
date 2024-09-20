@@ -60,7 +60,6 @@ typedef struct {
 /*--------------------------------Function---------------------------------*/
 
 STD_ReturnType PWM_Init(const PWM_CONFIG *pwm_obj);
-STD_ReturnType PWM_DEInit(const PWM_CONFIG *pwm_obj);
 void PWM_Write(uint16 dutyCycle,PWM_PIN _pin);
 
 

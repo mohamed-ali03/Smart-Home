@@ -47,6 +47,14 @@ typedef enum{
 	False , 
 	True
 }bool;
+
+
+typedef enum {
+	No_one,
+	Face_Detected,
+	Face_Not_Detected,
+}Camera_status;
+
 /***************************FUNCTIONS****************************/
 
 

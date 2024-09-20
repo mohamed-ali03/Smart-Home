@@ -12,8 +12,12 @@
 #define MYUBRR F_CPU/16/BAUD-1  // Calculate UBRR value for the given baud rate
 
 
+typedef struct{
+	void (*interruptReceive)(void) ;
+	Camera_status *computer_vision_cam ;
+}USART_Config;
 
-void USART_Init(void);
-void USART_Trans(char data);
-void USART_SendStr(const char* str);
+void USART_Init(USART_Config *usart_obj);
+void USART_Trans(uint8 data);
+void USART_SendStr(const uint8 *str);
 #endif /* USART_H_ */

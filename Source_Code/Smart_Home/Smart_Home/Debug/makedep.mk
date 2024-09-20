@@ -4,8 +4,6 @@
 
 ECU_Layer\Buzzer\Buzzer.c
 
-ECU_Layer\Door_Motor\Door_Motor.c
-
 ECU_Layer\Keypad\Keypad.c
 
 ECU_Layer\RGB_Mdule\RGB.c
@@ -20,7 +18,9 @@ MCAL_Layer\Interrupt\Internal_Interrupt.c
 
 MCAL_Layer\Interrupt\External_Interrupt.c
 
-MCAL_Layer\PWM\PWM.c
+MCAL_Layer\PWM_Timer1\PWM_Timer1.c
+
+MCAL_Layer\PWM_Timer2\PWM_Timer2.c
 
 MCAL_Layer\USART\USART.c
 

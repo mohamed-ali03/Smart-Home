@@ -23,7 +23,8 @@ typedef struct{
 }Keypad_Config;
 /*-----------------------Functions Declaration------------------*/
 STD_ReturnType Keypad_Init(Keypad_Config *keypad_obj,uint8 *password);
-STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 pass[],bool *ispasstrue,bool *Door_Flag);
+STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_char,Camera_status *cam) ;
+STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 pass[],bool *ispasstrue,Camera_status *cam);
 
 
 

@@ -5,7 +5,7 @@
  *  Author: mo ali
  */ 
 
-#include "PWM.h"
+#include "PWM_Timer1.h"
 
 STD_ReturnType PWM_Init(const PWM_CONFIG *pwm_obj){
 	STD_ReturnType status = RET_OK;
@@ -30,17 +30,6 @@ STD_ReturnType PWM_Init(const PWM_CONFIG *pwm_obj){
 		// Initialze duty cycle 
 		PWM_SET_DUTY_CYCLE_OCR1A(1500);
 		PWM_SET_DUTY_CYCLE_OCR1B(1000);
-	}
-	return status ;
-}
-
-STD_ReturnType PWM_DEInit(const PWM_CONFIG *pwm_obj){
-	STD_ReturnType status = RET_OK;
-	if (NULL == pwm_obj){
-		status = RET_NOT_OK;
-	}
-	else {
-		
 	}
 	return status ;
 }

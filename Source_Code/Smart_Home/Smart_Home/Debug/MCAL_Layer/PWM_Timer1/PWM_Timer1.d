@@ -1,9 +1,8 @@
-ECU_Layer/Door_Motor/Door_Motor.d ECU_Layer/Door_Motor/Door_Motor.o: \
- ../ECU_Layer/Door_Motor/Door_Motor.c \
- ../ECU_Layer/Door_Motor/Door_Motor.h \
- ../ECU_Layer/Door_Motor/../../MCAL_Layer/GPIO.h \
- ../ECU_Layer/Door_Motor/../../MCAL_Layer/STD_DataType.h \
- ../ECU_Layer/Door_Motor/../../MCAL_Layer/STD_Library.h \
+MCAL_Layer/PWM_Timer1/PWM_Timer1.d MCAL_Layer/PWM_Timer1/PWM_Timer1.o: \
+ ../MCAL_Layer/PWM_Timer1/PWM_Timer1.c \
+ ../MCAL_Layer/PWM_Timer1/PWM_Timer1.h ../MCAL_Layer/PWM_Timer1/../GPIO.h \
+ ../MCAL_Layer/PWM_Timer1/../STD_DataType.h \
+ ../MCAL_Layer/PWM_Timer1/../STD_Library.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -26,13 +25,13 @@ ECU_Layer/Door_Motor/Door_Motor.d ECU_Layer/Door_Motor/Door_Motor.o: \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h
 
-../ECU_Layer/Door_Motor/Door_Motor.h:
+../MCAL_Layer/PWM_Timer1/PWM_Timer1.h:
 
-../ECU_Layer/Door_Motor/../../MCAL_Layer/GPIO.h:
+../MCAL_Layer/PWM_Timer1/../GPIO.h:
 
-../ECU_Layer/Door_Motor/../../MCAL_Layer/STD_DataType.h:
+../MCAL_Layer/PWM_Timer1/../STD_DataType.h:
 
-../ECU_Layer/Door_Motor/../../MCAL_Layer/STD_Library.h:
+../MCAL_Layer/PWM_Timer1/../STD_Library.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 

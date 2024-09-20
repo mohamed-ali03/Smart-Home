@@ -7,7 +7,7 @@
 
 #include "Keypad.h"
 
-static STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_char,bool *Door_Flag) ;
+
 
 const uint8 keypad[4][3] = {
 	{'1', '2', '3'},
@@ -39,36 +39,34 @@ STD_ReturnType Keypad_Init(Keypad_Config *keypad_obj,uint8 *password){
 
 
 
-STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 pass[],bool *ispasstrue,bool *Door_Flag){
+STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 pass[],bool *ispasstrue,Camera_status *cam){
 	STD_ReturnType status = RET_OK;
 	uint8 key ;
 	uint32 index = 0 ;
-	uint32 attempt = 0 ;
 	if (NULL == keypad_obj || NULL == pass){
 		status = RET_NOT_OK;
 	}
 	else{
-		while(attempt < 1 ){
-			if(*Door_Flag){
-				break;
-			}
-			status = Keypad_Get_char(keypad_obj,&key,Door_Flag);
-			if(key == '#'){
-				if (strcmp(pass,keypad_obj->ActualPassword) == 0 ){
-					*ispasstrue = True;
+		while(1){
+			//if(*cam == Face_Not_Detected){
+				status = Keypad_Get_char(keypad_obj,&key,cam);
+				if(key == '#'){
+					if (strcmp(pass,keypad_obj->ActualPassword) == 0 ){
+						*ispasstrue = True;
+					}
+					else {
+						*ispasstrue = False;
+					}
 					break;
 				}
-				else {
-					*ispasstrue = False;
-					if(index==4)
-						attempt++;
+				else if (index <4){
+					pass[index] = key ;
+					index++;
 				}
-				index = 0;
-			}
-			else if (index <4){
-				pass[index] = key ;
-				index++;
-			}
+			//}
+			//else{
+				//break;
+			//}
 		}
 	}
 	return status;
@@ -77,7 +75,7 @@ STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 p
 
 
 /*-----------------------------------------------------asissstant functions---------------------------------------*/
-static STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_char,bool *Door_Flag){
+STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_char,Camera_status *cam){
 	STD_ReturnType status = RET_OK;
 	bool flag = 0 ;
 	GPIO_PIN_LOGIC logic ;
@@ -86,41 +84,43 @@ static STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_ch
 	uint32 count_rows ;
 	uint32 count_colums;
 	
+	
 	if (NULL == keypad_obj ){
 		status = RET_NOT_OK;
 	}
 	else{
-		while(1){
-			if(flag || *Door_Flag){
-				break;
-			}
-			for(count_colums = 0 ; count_colums < 3 ; count_colums++)
-			{
-				if (flag){
-					break;
-				}
-				// set all columns low then set the required column high
-				for(clear = 0 ; clear < 3 ; clear++){
-					status = GPIO_PIN_Write_logic(&(keypad_obj->Columns[clear]),GPIO_PIN_LOGIC_HIGH);
-				}
-				status = GPIO_PIN_Write_logic(&(keypad_obj->Columns[count_colums]),GPIO_PIN_LOGIC_LOW);
-				
-				for(count_rows = 0 ; count_rows < 4 ; count_rows++){
-					status = GPIO_PIN_Read_Logic(&(keypad_obj->Rows[count_rows]),&logic);
-					
-					if (logic == GPIO_PIN_LOGIC_LOW){
-						while(1){
-							status = GPIO_PIN_Read_Logic(&(keypad_obj->Rows[count_rows]),&logic);
-							if(logic == GPIO_PIN_LOGIC_HIGH){
-								break;
-							}
-						}
-						*_char = keypad[count_rows][count_colums];
-						flag = True ;
+		while(!flag){
+			//if(*cam == Face_Not_Detected){			
+				for(count_colums = 0 ; count_colums < 3 ; count_colums++)
+				{
+					if (flag)
 						break;
+					
+					// set all columns low then set the required column high
+					for(clear = 0 ; clear < 3 ; clear++){
+						status = GPIO_PIN_Write_logic(&(keypad_obj->Columns[clear]),GPIO_PIN_LOGIC_HIGH);
+					}
+					status = GPIO_PIN_Write_logic(&(keypad_obj->Columns[count_colums]),GPIO_PIN_LOGIC_LOW);
+					_delay_ms(5);
+					for(count_rows = 0 ; count_rows < 4 ; count_rows++){
+						status = GPIO_PIN_Read_Logic(&(keypad_obj->Rows[count_rows]),&logic);
+					
+						if (logic == GPIO_PIN_LOGIC_LOW){
+							*_char = keypad[count_rows][count_colums];
+						
+							while(!(logic == GPIO_PIN_LOGIC_HIGH)){
+								status = GPIO_PIN_Read_Logic(&(keypad_obj->Rows[count_rows]),&logic);
+							}
+							flag = True ;
+						}
+						if(flag)
+							break;
 					}
 				}
-			}
+			//}
+			//else{
+				//break;
+			//}
 		}
 	}
 	

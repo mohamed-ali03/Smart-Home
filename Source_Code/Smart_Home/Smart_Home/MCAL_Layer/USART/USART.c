@@ -65,8 +65,4 @@ ISR(USART_RXC_vect){
 	else if (receive == '2' ){
 		*flag = Face_Not_Detected ;
 	}
-	
-	if(interruptHandler){
-		interruptHandler();
-	}
 }

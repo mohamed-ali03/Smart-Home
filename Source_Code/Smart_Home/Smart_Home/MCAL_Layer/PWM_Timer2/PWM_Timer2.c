@@ -14,13 +14,13 @@ void PWM_init_Timer2(void)
 	TCCR2 = (1 << WGM20) | (1 << WGM21) | (1 << COM21) | (1 << CS22);
 
 	// Initialize with a neutral position for the servo (~1.5ms pulse)
-	OCR2 = 16;  // This gives approximately a 1.5ms pulse width (servo's neutral position)
+	OCR2 = 125;  // This gives approximately a 1.5ms pulse width (servo's neutral position)
 }
 
 // Function to set the servo angle
 void set_servo_angle(uint8 angle)
 {
-	uint8 duty_cycle = ((angle * 16) / 180) + 16;
+	uint8 duty_cycle = (125 + (angle * 125) / 180);
 	
 	OCR2 = duty_cycle;
 }

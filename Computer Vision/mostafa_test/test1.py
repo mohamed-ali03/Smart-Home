@@ -1,46 +1,25 @@
 import cv2 as cv
 import face_recognition
 import os
-import pyfirmata2
 import time
 import datetime
+import serial
 
 # Initialize Arduino and Servo
-board = pyfirmata2.Arduino("COM3")
-servo_pin = 9
-servo = board.get_pin('d:9:o')
+#board = pyfirmata2.Arduino("COM3")
+#servo_pin = 9
+#servo = board.get_pin('d:9:o')
+
+ser = serial.Serial("COM3",baudrate=9600,timeout=1)
+time.sleep(2)
 
 def open_door():
-    print("Opening door")
-    servo.write(90)
-    time.sleep(5)
-    servo.write(0)
+    ser.write('1')
+    time.sleep(3)
 
-# Keypad Reading
-def read_keypad():
-    rows = [6, 7, 8, 10]
-    cols = [2, 3, 4, 5]
-    row_pins = [board.get_pin(f'd:{pin}:o') for pin in rows]
-    col_pins = [board.get_pin(f'd:{pin}:o') for pin in cols]
-
-    keypad_map = [
-        ['1', '2', '3', 'A'],
-        ['4', '5', '6', 'B'],
-        ['7', '8', '9', 'C'],
-        ['*', '0', '#', 'D']
-    ]
-    
-    pressed_key = None
-    
-    while pressed_key is None:
-        for col_pin in col_pins:
-            col_pin.write(0)
-            for row_pin in row_pins:
-                if row_pin.read() == 0:
-                    pressed_key = keypad_map[row_pins.index(row_pin)][col_pins.index(col_pin)]
-                    col_pin.write(1)
-                    return pressed_key
-            col_pin.write(1)
+def Keybad():
+    ser.write('2')
+    time.sleep(3)
 
 # Face Recognition Setup
 Home_owners = []
@@ -48,7 +27,7 @@ home_password = '15768'
 known_face_encodings = []
 known_names = []
 
-folder_path = r"C:\Users\moustafa\Documents\Faces_train\homeowners"
+folder_path = r"C:\Users\engmo\OneDrive\Desktop\New folder (9)\homeowners"
 
 def delete_person_image(folder_path, person_name):
     file_name = f"{person_name}.jpeg"
@@ -102,7 +81,6 @@ while True:
             name = known_names[first_match_index]
             cv.rectangle(resize_frame, (left, top), (right, bottom), (0, 255, 0), 2)
             cv.putText(resize_frame, name, (left, top - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-            open_door()
         else:
             cv.rectangle(resize_frame, (left, top), (right, bottom), (0, 0, 255), 2)
             cv.putText(resize_frame, name, (left, top - 10), cv.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
@@ -110,9 +88,9 @@ while True:
             print("Do you know the home password for the unknown person? (yes/no)")
             check = input()
             if check == 'yes':
-                entered_password = input("Enter password: ")
+                entered_password = Keybad()
                 if entered_password == home_password:
-                    open_door()
+                    print('open_door')
                 else:
                     print("Incorrect password.")
             elif check == 'no':
@@ -123,6 +101,7 @@ while True:
 4. Reset the home password''')
                 choice = input()
                 if choice == '1':
+                    print('open_door')
                     open_door()
                     if not image_captured:
                         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -131,6 +110,7 @@ while True:
                         print(f"Captured image saved to {unknown_image_path}")
                         image_captured = True
                 elif choice == '2':
+                    print('open_door')
                     open_door()
                 elif choice == '3':
                     delete_person_image(folder_path, input("Enter person name to delete: "))
@@ -141,6 +121,8 @@ while True:
     if cv.waitKey(20) & 0xFF == ord("d"):
         break
 
-board.exit()
+#board.exit()
+# Close the serial port
+ser.close()
 capture.release()
 cv.destroyAllWindows()

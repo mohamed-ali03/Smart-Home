@@ -11,8 +11,6 @@
 /***************************INCLUDES****************************/
 #include "STD_Library.h"
 /***************************MACRO DECLERATION ****************************/
-#define F_CPU 8000000UL      // CPU frequency set to 8 MHz
-
 
 #define  uint8      unsigned char
 #define  uint16     unsigned short

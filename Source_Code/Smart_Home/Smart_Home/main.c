@@ -12,8 +12,7 @@ int main(void)
 	Initialize();
 	USART_SendStr("Welcome\n\r");
     while (1) 
-    {		
-		Open_Door();
+    {	
 		wholeProject();
     }
 	return 0 ;
@@ -24,8 +23,10 @@ void wholeProject(void){
 	if (cam_status == Face_Detected){
 		USART_SendStr("Door is opened using Face Detection\n\r");
 		Open_Door();
-	}
+		cam_status = No_one ;
+	}	
 	else if (cam_status == Face_Not_Detected) {
+		USART_SendStr("Welcome\n\r");
 		USART_SendStr("Your are not in the data base. please enter the password on keypad\n\r");
 		status = Keypad_Get_Check_Password(&keypad__,&EnterPass,&IsPassTrue,&cam_status);
 		if(IsPassTrue){
@@ -37,21 +38,17 @@ void wholeProject(void){
 			USART_SendStr("password is not True .Please Try again\n\r");
 			status = Buzzer_Play(&buzzer_);
 		}
+		cam_status = No_one;
 	}
 	else if (cam_status == No_one )
 	{
-		/*nothing*/
+		Close_Door();
 	}
 	
 	if(PIR_Flag){
-		while(count < 90000){
-			Temperature();
-			Lighting();
-			count++ ;
-		}
-		count = 0 ;
+		Temperature();
+		Lighting();
 	}
-	
 }
 			
 																		/* Initialize all Modules and devices */
@@ -60,7 +57,7 @@ void Initialize (void){
 	status = PWM_Init(&PWM);			// Lighting control and fan motor using PWM with timer1			
 	PWM_init_Timer2();					// servo motor using PWM with timer2
 	status = ADC_Initialize(&adc);		// temperature and lighting sensor using ADC
-	//USART_Init(&usart);						// communicate with virtual terminal 
+	USART_Init(&usart);						// communicate with virtual terminal 
 	// External interrrupt
 	status = INTx_Initialize(&PIR_Sensor);		// motion sensor using external interrrupt(INT)
 	// output moduls
@@ -84,22 +81,24 @@ void PIR_Sense(void){
 // when USART module receive 1 the interrupt will excute this function
 void Open_Door(void){
 		// Example: Move servo to 0 degrees
-		set_servo_angle(0);
+		set_servo_angle(90);
 
-		// Example: Move servo to 180 degrees
+		// Example: Move servo to 90 degrees
 		set_servo_angle(180);
 		_delay_ms(1000);
+}
 
-		// Example: Move servo to 180 degrees
-		set_servo_angle(0);
+void Close_Door(void){
+	// Example: Move servo to 0 degrees
+	set_servo_angle(90);
 }
 																	/* sense temperature and make an action according to it */
 void Temperature(void){
 	// sense the temperature of the room
 	status = ADC_Read(temp_sensor,&LD35DZ_Reading);
 	// Convert the ADC value to temperature in degrees Celsius.
-	//TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 - 0.5)*100));	// for tmp36
-	TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 )*100));			// for ld35dz
+	TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 - 0.5)*100));	// for tmp36
+	//TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 )*100));			// for ld35dz
 	
 	//TMP = 25;
 	// choose the suitable state

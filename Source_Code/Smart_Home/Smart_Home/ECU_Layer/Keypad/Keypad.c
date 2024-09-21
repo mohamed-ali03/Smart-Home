@@ -48,7 +48,7 @@ STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 p
 	}
 	else{
 		while(1){
-			//if(*cam == Face_Not_Detected){
+			if(*cam == Face_Not_Detected){
 				status = Keypad_Get_char(keypad_obj,&key,cam);
 				if(key == '#'){
 					if (strcmp(pass,keypad_obj->ActualPassword) == 0 ){
@@ -63,10 +63,10 @@ STD_ReturnType Keypad_Get_Check_Password(const Keypad_Config *keypad_obj,uint8 p
 					pass[index] = key ;
 					index++;
 				}
-			//}
-			//else{
-				//break;
-			//}
+			}
+			else{
+				break;
+			}
 		}
 	}
 	return status;
@@ -90,7 +90,7 @@ STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_char,Came
 	}
 	else{
 		while(!flag){
-			//if(*cam == Face_Not_Detected){			
+			if(*cam == Face_Not_Detected){			
 				for(count_colums = 0 ; count_colums < 3 ; count_colums++)
 				{
 					if (flag)
@@ -117,10 +117,10 @@ STD_ReturnType Keypad_Get_char(const Keypad_Config *keypad_obj,uint8 *_char,Came
 							break;
 					}
 				}
-			//}
-			//else{
-				//break;
-			//}
+			}
+			else{
+				break;
+			}
 		}
 	}
 	

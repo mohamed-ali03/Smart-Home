@@ -21,6 +21,8 @@ void Temperature(void);
 void Lighting(void);
 // function to open the door
 void Open_Door(void);
+// close door 
+void Close_Door(void);
 // print status 
 void PrintStatus(void);
 // convert int to string 

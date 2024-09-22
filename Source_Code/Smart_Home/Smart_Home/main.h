@@ -6,8 +6,10 @@
  *  Author: Team 10 
  */ 
 
+
+
+
 /*---------------------------------includes --------------------------------*/
-#define F_CPU 8000000UL      // CPU frequency set to 8 MHz
 #include "MCAL_Layer/MCAL_Modules.h"
 #include "ECU_Layer/ECU_Devices.h"
 
@@ -52,6 +54,12 @@ uint8 EnterPass[5];
 uint8 *password = "1234";
 
 double count = 0 ;
+
+typedef enum{
+	Door_closed ,
+	Door_opened ,
+}Door_status ;
+Door_status door = Door_closed ;
 
 /*-------------------------------Macro Declaration-----------------------------*/
 #define FAN_MAX_SPEED		1023

@@ -21,33 +21,38 @@ int main(void)
 void wholeProject(void){
 	// computer vision part
 	if (cam_status == Face_Detected){
-		USART_SendStr("Door is opened using Face Detection\n\r");
-		Open_Door();
-		cam_status = No_one ;
+		if(door == Door_closed){
+			USART_SendStr("\n\rDoor is opened using Face Detection\n\r");
+			Open_Door();
+			door = Door_opened ;
+		}
 	}	
 	else if (cam_status == Face_Not_Detected) {
-		USART_SendStr("Welcome\n\r");
-		USART_SendStr("Your are not in the data base. please enter the password on keypad\n\r");
-		status = Keypad_Get_Check_Password(&keypad__,&EnterPass,&IsPassTrue,&cam_status);
-		if(IsPassTrue){
-			USART_SendStr("Door is opened using password\n\r");
-			status = Buzzer_Stop(&buzzer_);
-			Open_Door();
+		if(door == Door_closed){
+			USART_SendStr("\n\rYou are not in the data base. please enter the password on keypad\n\r");
+			while(!IsPassTrue){
+				status = Keypad_Get_Check_Password(&keypad__,&EnterPass,&IsPassTrue,&cam_status);
+				if(IsPassTrue){
+					USART_SendStr("\n\rDoor is opened using password\n\r");
+					status = Buzzer_Stop(&buzzer_);
+					door = Door_opened ;
+					Open_Door();
+				}
+				else {
+					USART_SendStr("\n\rpassword is not True .Please Try again\n\r");
+					status = Buzzer_Play(&buzzer_);
+				}
+			}
+			
+			IsPassTrue = False ;
 		}
-		else {
-			USART_SendStr("password is not True .Please Try again\n\r");
-			status = Buzzer_Play(&buzzer_);
-		}
-		cam_status = No_one;
 	}
 	else if (cam_status == No_one )
 	{
-		Close_Door();
-	}
-	
-	if(PIR_Flag){
-		Temperature();
-		Lighting();
+		if(door == Door_opened){
+			door = Door_closed;
+			Close_Door();
+		}
 	}
 }
 			
@@ -67,7 +72,8 @@ void Initialize (void){
 																					
 	// intialize the status of the fan and lighing
 	PWM_Write(FAN_STOP,motor_en);				// make motor off at begin
-	PWM_Write(0,lighting_led);					// make light off at begin 
+	PWM_Write(0,lighting_led);					// make light off at begin
+	set_servo_angle(90);						// make servo at zero angle 
 																					
 }
 
@@ -75,17 +81,14 @@ void Initialize (void){
 
 // INT0 : if PIR sense any motion it will set flag and enable the other sensors
 void PIR_Sense(void){
-	PIR_Flag = True ;
+	Temperature();
+	Lighting();
 }
-																					/* interaction with computer vision */
+																			/* interaction with computer vision */
 // when USART module receive 1 the interrupt will excute this function
 void Open_Door(void){
-		// Example: Move servo to 0 degrees
-		set_servo_angle(90);
-
-		// Example: Move servo to 90 degrees
-		set_servo_angle(180);
-		_delay_ms(1000);
+	// Example: Move servo to 90 degrees
+	set_servo_angle(180);
 }
 
 void Close_Door(void){
@@ -100,7 +103,6 @@ void Temperature(void){
 	TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 - 0.5)*100));	// for tmp36
 	//TMP = (uint16)(round((LD35DZ_Reading * 5.0/1023.0 )*100));			// for ld35dz
 	
-	//TMP = 25;
 	// choose the suitable state
 	if(TMP < 20 ){
 		motor_speed =  FAN_STOP ;

@@ -8,7 +8,7 @@
 
 #ifndef USART_H_
 #define USART_H_
-#define F_CPU 8000000UL      // CPU frequency set to 8 MHz
+#define F_CPU 8000000UL
 #define BAUD 9600            // Baud rate for USART
 #define MYUBRR F_CPU/16/BAUD-1  // Calculate UBRR value for the given baud rate
 

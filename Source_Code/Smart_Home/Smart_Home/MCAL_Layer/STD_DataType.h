@@ -12,6 +12,12 @@
 #include "STD_Library.h"
 /***************************MACRO DECLERATION ****************************/
 
+
+#ifdef F_CPU
+#undef F_CPU
+#define F_CPU 8000000UL
+#endif 
+
 #define  uint8      unsigned char
 #define  uint16     unsigned short
 #define  uint32     unsigned int

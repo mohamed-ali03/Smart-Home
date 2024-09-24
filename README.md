@@ -1,4 +1,4 @@
-# Smart-Home
+# Mini Smart Home - Mind Cloud Team
 
 # Team Members :<br>
 Name : Mariam Ahmed Mohamed--(PCB Design) <br>
